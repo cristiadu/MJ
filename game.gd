@@ -1,35 +1,42 @@
 extends Node2D
 
-var total_tiles = 144
-
 var tiles = [
 	{
+		"type": "number",
 		"suit": "circles",
 		"number": 4,
-		"force_face_up": false,
 		"count": 4,
-		"resource": "res://images/tile_circle_4.png"
+		"resource": "res://images/tile.png"
 	},
 	{
+		"type": "honor",
 		"honor": "east",
-		"force_face_up": false,
 		"count": 4,
-		"resource": "res://images/tile_east.png"
+		"resource": "res://images/tile.png"
 	},
 	{
-		"suit": "flower",
+		"type": "flower",
 		"number": 4,
-		"force_face_up": true,
 		"count": 1,
-		"resource": "res://images/tile_flower_4.png"
+		"resource": "res://images/tile.png"
 	},
 ]
 
-# Called when the node enters the scene tree for the first time.
+var tile_scene = preload("res://tile.tscn")
+
 func _ready():
-	pass
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+	var game_tiles = []
+	var tile_object
+	for tile in tiles:
+		for i in range(tile.count):
+			tile_object = tile_scene.instantiate()
+			tile_object.init(
+				tile.type, 
+				tile.resource, 
+				tile.suit if tile.has("suit") else "", 
+				tile.honor if tile.has("honor") else "", 
+				tile.number if tile.has("number") else -1)
+			game_tiles.append(tile_object)
+			
+	for tile_instance in game_tiles:
+		$Tiles/Discard.add_tile_to_discard_pile(tile_instance)

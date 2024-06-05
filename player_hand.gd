@@ -11,6 +11,6 @@ func add_tile_to_hand(tile, is_face_down = true):
 		print("Cannot add another tile to player hand, reached max number!")
 		return
 	
-	tile.transform.position.x = (total_tiles_in_hand - 1) * space_between_tiles
+	tile.position.x = total_tiles_in_hand * space_between_tiles
 	tile.is_face_down = is_face_down
-	tile.parent = self
+	add_child(tile)

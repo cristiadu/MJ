@@ -7,7 +7,7 @@ var current_line = 1
 var max_lines = 5
 
 func add_tile_to_discard_pile(tile):
-	var current_line_node = get_node("Line" + current_line)
+	var current_line_node = get_node("Line" + str(current_line))
 	var total_tiles_in_line = current_line_node.get_child_count()
 	
 	# If it's more than it can have per line, then move to next line.
@@ -18,9 +18,9 @@ func add_tile_to_discard_pile(tile):
 			print("Error, max number of lines reached for discard pile!")
 			return
 		
-		current_line_node = get_node("Line" + current_line)
+		current_line_node = get_node("Line" + str(current_line))
 		total_tiles_in_line = current_line_node.get_child_count()
 		
-	tile.transform.position.x = (total_tiles_in_line - 1) * space_between_tiles
+	tile.position.x = total_tiles_in_line * space_between_tiles
 	tile.is_face_down = false # all cards here are face up
-	tile.parent = current_line_node
+	current_line_node.add_child(tile)

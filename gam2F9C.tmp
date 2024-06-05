@@ -58,58 +58,72 @@ position = Vector2(310, 846)
 script = ExtResource("4_58fn3")
 
 [node name="Tile" parent="Tiles/Player1/Hand" instance=ExtResource("3_oj160")]
+scale = Vector2(1, 1)
 is_face_down = false
 
 [node name="Tile2" parent="Tiles/Player1/Hand" instance=ExtResource("3_oj160")]
 position = Vector2(100, 0)
+scale = Vector2(1, 1)
 is_face_down = false
 
 [node name="Tile3" parent="Tiles/Player1/Hand" instance=ExtResource("3_oj160")]
 position = Vector2(200, 0)
+scale = Vector2(1, 1)
 is_face_down = false
 
 [node name="Tile4" parent="Tiles/Player1/Hand" instance=ExtResource("3_oj160")]
 position = Vector2(300, 0)
+scale = Vector2(1, 1)
 is_face_down = false
 
 [node name="Tile5" parent="Tiles/Player1/Hand" instance=ExtResource("3_oj160")]
 position = Vector2(400, 0)
+scale = Vector2(1, 1)
 is_face_down = false
 
 [node name="Tile6" parent="Tiles/Player1/Hand" instance=ExtResource("3_oj160")]
 position = Vector2(500, 0)
+scale = Vector2(1, 1)
 is_face_down = false
 
 [node name="Tile7" parent="Tiles/Player1/Hand" instance=ExtResource("3_oj160")]
 position = Vector2(600, 0)
+scale = Vector2(1, 1)
 is_face_down = false
 
 [node name="Tile8" parent="Tiles/Player1/Hand" instance=ExtResource("3_oj160")]
 position = Vector2(700, 0)
+scale = Vector2(1, 1)
 is_face_down = false
 
 [node name="Tile9" parent="Tiles/Player1/Hand" instance=ExtResource("3_oj160")]
 position = Vector2(800, 0)
+scale = Vector2(1, 1)
 is_face_down = false
 
 [node name="Tile10" parent="Tiles/Player1/Hand" instance=ExtResource("3_oj160")]
 position = Vector2(900, 0)
+scale = Vector2(1, 1)
 is_face_down = false
 
 [node name="Tile11" parent="Tiles/Player1/Hand" instance=ExtResource("3_oj160")]
 position = Vector2(1000, 0)
+scale = Vector2(1, 1)
 is_face_down = false
 
 [node name="Tile12" parent="Tiles/Player1/Hand" instance=ExtResource("3_oj160")]
 position = Vector2(1100, 0)
+scale = Vector2(1, 1)
 is_face_down = false
 
 [node name="Tile13" parent="Tiles/Player1/Hand" instance=ExtResource("3_oj160")]
 position = Vector2(1200, 0)
+scale = Vector2(1, 1)
 is_face_down = false
 
 [node name="Tile14" parent="Tiles/Player1/Hand" instance=ExtResource("3_oj160")]
 position = Vector2(1300, 0)
+scale = Vector2(1, 1)
 is_face_down = false
 
 [node name="Table" type="Node2D" parent="Tiles/Player1"]
@@ -121,113 +135,149 @@ script = ExtResource("5_gvm74")
 modulate = Color(0.646029, 0.646029, 0.646029, 1)
 
 [node name="Tile19" parent="Tiles/Player1/Table/BottomLine" instance=ExtResource("3_oj160")]
+scale = Vector2(1, 1)
 
 [node name="Tile20" parent="Tiles/Player1/Table/BottomLine" instance=ExtResource("3_oj160")]
 position = Vector2(130, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile21" parent="Tiles/Player1/Table/BottomLine" instance=ExtResource("3_oj160")]
 position = Vector2(260, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile22" parent="Tiles/Player1/Table/BottomLine" instance=ExtResource("3_oj160")]
 position = Vector2(390, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile23" parent="Tiles/Player1/Table/BottomLine" instance=ExtResource("3_oj160")]
 position = Vector2(520, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile24" parent="Tiles/Player1/Table/BottomLine" instance=ExtResource("3_oj160")]
 position = Vector2(650, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile25" parent="Tiles/Player1/Table/BottomLine" instance=ExtResource("3_oj160")]
 position = Vector2(780, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile26" parent="Tiles/Player1/Table/BottomLine" instance=ExtResource("3_oj160")]
 position = Vector2(910, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile27" parent="Tiles/Player1/Table/BottomLine" instance=ExtResource("3_oj160")]
 position = Vector2(1040, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile28" parent="Tiles/Player1/Table/BottomLine" instance=ExtResource("3_oj160")]
 position = Vector2(1170, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile29" parent="Tiles/Player1/Table/BottomLine" instance=ExtResource("3_oj160")]
 position = Vector2(1300, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile30" parent="Tiles/Player1/Table/BottomLine" instance=ExtResource("3_oj160")]
 position = Vector2(1430, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile31" parent="Tiles/Player1/Table/BottomLine" instance=ExtResource("3_oj160")]
 position = Vector2(1560, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile32" parent="Tiles/Player1/Table/BottomLine" instance=ExtResource("3_oj160")]
 position = Vector2(1690, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile33" parent="Tiles/Player1/Table/BottomLine" instance=ExtResource("3_oj160")]
 position = Vector2(1820, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile34" parent="Tiles/Player1/Table/BottomLine" instance=ExtResource("3_oj160")]
 position = Vector2(1950, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile35" parent="Tiles/Player1/Table/BottomLine" instance=ExtResource("3_oj160")]
 position = Vector2(2080, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile36" parent="Tiles/Player1/Table/BottomLine" instance=ExtResource("3_oj160")]
 position = Vector2(2210, 0)
+scale = Vector2(1, 1)
 
 [node name="TopLine" type="Node2D" parent="Tiles/Player1/Table"]
 position = Vector2(0, 25)
 
 [node name="Tile" parent="Tiles/Player1/Table/TopLine" instance=ExtResource("3_oj160")]
+scale = Vector2(1, 1)
 
 [node name="Tile2" parent="Tiles/Player1/Table/TopLine" instance=ExtResource("3_oj160")]
 position = Vector2(130, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile3" parent="Tiles/Player1/Table/TopLine" instance=ExtResource("3_oj160")]
 position = Vector2(260, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile4" parent="Tiles/Player1/Table/TopLine" instance=ExtResource("3_oj160")]
 position = Vector2(390, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile5" parent="Tiles/Player1/Table/TopLine" instance=ExtResource("3_oj160")]
 position = Vector2(520, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile6" parent="Tiles/Player1/Table/TopLine" instance=ExtResource("3_oj160")]
 position = Vector2(650, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile7" parent="Tiles/Player1/Table/TopLine" instance=ExtResource("3_oj160")]
 position = Vector2(780, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile8" parent="Tiles/Player1/Table/TopLine" instance=ExtResource("3_oj160")]
 position = Vector2(910, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile9" parent="Tiles/Player1/Table/TopLine" instance=ExtResource("3_oj160")]
 position = Vector2(1040, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile10" parent="Tiles/Player1/Table/TopLine" instance=ExtResource("3_oj160")]
 position = Vector2(1170, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile11" parent="Tiles/Player1/Table/TopLine" instance=ExtResource("3_oj160")]
 position = Vector2(1300, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile12" parent="Tiles/Player1/Table/TopLine" instance=ExtResource("3_oj160")]
 position = Vector2(1430, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile13" parent="Tiles/Player1/Table/TopLine" instance=ExtResource("3_oj160")]
 position = Vector2(1560, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile14" parent="Tiles/Player1/Table/TopLine" instance=ExtResource("3_oj160")]
 position = Vector2(1690, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile15" parent="Tiles/Player1/Table/TopLine" instance=ExtResource("3_oj160")]
 position = Vector2(1820, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile16" parent="Tiles/Player1/Table/TopLine" instance=ExtResource("3_oj160")]
 position = Vector2(1950, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile17" parent="Tiles/Player1/Table/TopLine" instance=ExtResource("3_oj160")]
 position = Vector2(2080, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile18" parent="Tiles/Player1/Table/TopLine" instance=ExtResource("3_oj160")]
 position = Vector2(2210, 0)
+scale = Vector2(1, 1)
 
 [node name="Player2" type="Node2D" parent="Tiles"]
 script = ExtResource("6_k4jhx")
@@ -239,49 +289,63 @@ scale = Vector2(0.6, 0.6)
 script = ExtResource("4_58fn3")
 
 [node name="Tile" parent="Tiles/Player2/Hand" instance=ExtResource("3_oj160")]
+scale = Vector2(1, 1)
 is_face_down = false
 
 [node name="Tile2" parent="Tiles/Player2/Hand" instance=ExtResource("3_oj160")]
 position = Vector2(100, 0)
+scale = Vector2(1, 1)
 is_face_down = false
 
 [node name="Tile3" parent="Tiles/Player2/Hand" instance=ExtResource("3_oj160")]
 position = Vector2(200, 0)
+scale = Vector2(1, 1)
 is_face_down = false
 
 [node name="Tile4" parent="Tiles/Player2/Hand" instance=ExtResource("3_oj160")]
 position = Vector2(300, 0)
+scale = Vector2(1, 1)
 is_face_down = false
 
 [node name="Tile5" parent="Tiles/Player2/Hand" instance=ExtResource("3_oj160")]
 position = Vector2(400, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile6" parent="Tiles/Player2/Hand" instance=ExtResource("3_oj160")]
 position = Vector2(500, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile7" parent="Tiles/Player2/Hand" instance=ExtResource("3_oj160")]
 position = Vector2(600, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile8" parent="Tiles/Player2/Hand" instance=ExtResource("3_oj160")]
 position = Vector2(700, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile9" parent="Tiles/Player2/Hand" instance=ExtResource("3_oj160")]
 position = Vector2(800, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile10" parent="Tiles/Player2/Hand" instance=ExtResource("3_oj160")]
 position = Vector2(900, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile11" parent="Tiles/Player2/Hand" instance=ExtResource("3_oj160")]
 position = Vector2(1000, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile12" parent="Tiles/Player2/Hand" instance=ExtResource("3_oj160")]
 position = Vector2(1100, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile13" parent="Tiles/Player2/Hand" instance=ExtResource("3_oj160")]
 position = Vector2(1200, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile14" parent="Tiles/Player2/Hand" instance=ExtResource("3_oj160")]
 position = Vector2(1300, 0)
+scale = Vector2(1, 1)
 
 [node name="Table" type="Node2D" parent="Tiles/Player2"]
 position = Vector2(460, 295)
@@ -292,113 +356,149 @@ script = ExtResource("5_gvm74")
 modulate = Color(0.646029, 0.646029, 0.646029, 1)
 
 [node name="Tile19" parent="Tiles/Player2/Table/BottomPile" instance=ExtResource("3_oj160")]
+scale = Vector2(1, 1)
 
 [node name="Tile20" parent="Tiles/Player2/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(130, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile21" parent="Tiles/Player2/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(260, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile22" parent="Tiles/Player2/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(390, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile23" parent="Tiles/Player2/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(520, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile24" parent="Tiles/Player2/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(650, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile25" parent="Tiles/Player2/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(780, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile26" parent="Tiles/Player2/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(910, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile27" parent="Tiles/Player2/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(1040, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile28" parent="Tiles/Player2/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(1170, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile29" parent="Tiles/Player2/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(1300, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile30" parent="Tiles/Player2/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(1430, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile31" parent="Tiles/Player2/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(1560, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile32" parent="Tiles/Player2/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(1690, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile33" parent="Tiles/Player2/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(1820, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile34" parent="Tiles/Player2/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(1950, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile35" parent="Tiles/Player2/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(2080, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile36" parent="Tiles/Player2/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(2210, 0)
+scale = Vector2(1, 1)
 
 [node name="TopPile" type="Node2D" parent="Tiles/Player2/Table"]
 position = Vector2(0, -25)
 
 [node name="Tile" parent="Tiles/Player2/Table/TopPile" instance=ExtResource("3_oj160")]
+scale = Vector2(1, 1)
 
 [node name="Tile2" parent="Tiles/Player2/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(130, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile3" parent="Tiles/Player2/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(260, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile4" parent="Tiles/Player2/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(390, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile5" parent="Tiles/Player2/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(520, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile6" parent="Tiles/Player2/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(650, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile7" parent="Tiles/Player2/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(780, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile8" parent="Tiles/Player2/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(910, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile9" parent="Tiles/Player2/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(1040, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile10" parent="Tiles/Player2/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(1170, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile11" parent="Tiles/Player2/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(1300, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile12" parent="Tiles/Player2/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(1430, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile13" parent="Tiles/Player2/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(1560, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile14" parent="Tiles/Player2/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(1690, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile15" parent="Tiles/Player2/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(1820, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile16" parent="Tiles/Player2/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(1950, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile17" parent="Tiles/Player2/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(2080, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile18" parent="Tiles/Player2/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(2210, 0)
+scale = Vector2(1, 1)
 
 [node name="Player3" type="Node2D" parent="Tiles"]
 script = ExtResource("6_k4jhx")
@@ -463,113 +563,149 @@ space_between_tiles = 110
 modulate = Color(0.646029, 0.646029, 0.646029, 1)
 
 [node name="Tile19" parent="Tiles/Player3/Table/BottomPile" instance=ExtResource("3_oj160")]
+scale = Vector2(1, 1)
 
 [node name="Tile20" parent="Tiles/Player3/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(110, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile21" parent="Tiles/Player3/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(220, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile22" parent="Tiles/Player3/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(330, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile23" parent="Tiles/Player3/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(440, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile24" parent="Tiles/Player3/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(550, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile25" parent="Tiles/Player3/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(660, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile26" parent="Tiles/Player3/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(770, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile27" parent="Tiles/Player3/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(880, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile28" parent="Tiles/Player3/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(990, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile29" parent="Tiles/Player3/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(1100, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile30" parent="Tiles/Player3/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(1210, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile31" parent="Tiles/Player3/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(1320, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile32" parent="Tiles/Player3/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(1430, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile33" parent="Tiles/Player3/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(1540, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile34" parent="Tiles/Player3/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(1650, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile35" parent="Tiles/Player3/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(1760, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile36" parent="Tiles/Player3/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(1870, 0)
+scale = Vector2(1, 1)
 
 [node name="TopPile" type="Node2D" parent="Tiles/Player3/Table"]
 position = Vector2(0, -25)
 
 [node name="Tile" parent="Tiles/Player3/Table/TopPile" instance=ExtResource("3_oj160")]
+scale = Vector2(1, 1)
 
 [node name="Tile2" parent="Tiles/Player3/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(110, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile3" parent="Tiles/Player3/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(220, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile4" parent="Tiles/Player3/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(330, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile5" parent="Tiles/Player3/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(440, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile6" parent="Tiles/Player3/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(550, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile7" parent="Tiles/Player3/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(660, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile8" parent="Tiles/Player3/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(770, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile9" parent="Tiles/Player3/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(880, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile10" parent="Tiles/Player3/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(990, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile11" parent="Tiles/Player3/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(1100, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile12" parent="Tiles/Player3/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(1210, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile13" parent="Tiles/Player3/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(1320, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile14" parent="Tiles/Player3/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(1430, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile15" parent="Tiles/Player3/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(1540, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile16" parent="Tiles/Player3/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(1650, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile17" parent="Tiles/Player3/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(1760, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile18" parent="Tiles/Player3/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(1870, 0)
+scale = Vector2(1, 1)
 
 [node name="Player4" type="Node2D" parent="Tiles"]
 script = ExtResource("6_k4jhx")
@@ -581,45 +717,59 @@ scale = Vector2(0.6, 0.6)
 script = ExtResource("4_58fn3")
 
 [node name="Tile" parent="Tiles/Player4/Hand" instance=ExtResource("3_oj160")]
+scale = Vector2(1, 1)
 
 [node name="Tile2" parent="Tiles/Player4/Hand" instance=ExtResource("3_oj160")]
 position = Vector2(700, -3.05176e-05)
+scale = Vector2(1, 1)
 
 [node name="Tile3" parent="Tiles/Player4/Hand" instance=ExtResource("3_oj160")]
 position = Vector2(800, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile4" parent="Tiles/Player4/Hand" instance=ExtResource("3_oj160")]
 position = Vector2(900, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile5" parent="Tiles/Player4/Hand" instance=ExtResource("3_oj160")]
 position = Vector2(1000, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile6" parent="Tiles/Player4/Hand" instance=ExtResource("3_oj160")]
 position = Vector2(1100, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile7" parent="Tiles/Player4/Hand" instance=ExtResource("3_oj160")]
 position = Vector2(1200, -3.05176e-05)
+scale = Vector2(1, 1)
 
 [node name="Tile8" parent="Tiles/Player4/Hand" instance=ExtResource("3_oj160")]
 position = Vector2(1300, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile9" parent="Tiles/Player4/Hand" instance=ExtResource("3_oj160")]
 position = Vector2(600, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile10" parent="Tiles/Player4/Hand" instance=ExtResource("3_oj160")]
 position = Vector2(100, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile11" parent="Tiles/Player4/Hand" instance=ExtResource("3_oj160")]
 position = Vector2(200, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile12" parent="Tiles/Player4/Hand" instance=ExtResource("3_oj160")]
 position = Vector2(300, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile13" parent="Tiles/Player4/Hand" instance=ExtResource("3_oj160")]
 position = Vector2(400, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile14" parent="Tiles/Player4/Hand" instance=ExtResource("3_oj160")]
 position = Vector2(500, 0)
+scale = Vector2(1, 1)
 
 [node name="Table" type="Node2D" parent="Tiles/Player4"]
 position = Vector2(400, 746)
@@ -632,113 +782,149 @@ space_between_tiles = 110
 modulate = Color(0.646029, 0.646029, 0.646029, 1)
 
 [node name="Tile19" parent="Tiles/Player4/Table/BottomPile" instance=ExtResource("3_oj160")]
+scale = Vector2(1, 1)
 
 [node name="Tile20" parent="Tiles/Player4/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(110, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile21" parent="Tiles/Player4/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(220, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile22" parent="Tiles/Player4/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(330, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile23" parent="Tiles/Player4/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(440, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile24" parent="Tiles/Player4/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(550, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile25" parent="Tiles/Player4/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(660, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile26" parent="Tiles/Player4/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(770, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile27" parent="Tiles/Player4/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(880, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile28" parent="Tiles/Player4/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(990, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile29" parent="Tiles/Player4/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(1100, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile30" parent="Tiles/Player4/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(1210, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile31" parent="Tiles/Player4/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(1320, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile32" parent="Tiles/Player4/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(1430, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile33" parent="Tiles/Player4/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(1540, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile34" parent="Tiles/Player4/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(1650, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile35" parent="Tiles/Player4/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(1760, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile36" parent="Tiles/Player4/Table/BottomPile" instance=ExtResource("3_oj160")]
 position = Vector2(1870, 0)
+scale = Vector2(1, 1)
 
 [node name="TopPile" type="Node2D" parent="Tiles/Player4/Table"]
 position = Vector2(0, -25)
 
 [node name="Tile" parent="Tiles/Player4/Table/TopPile" instance=ExtResource("3_oj160")]
+scale = Vector2(1, 1)
 
 [node name="Tile2" parent="Tiles/Player4/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(110, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile3" parent="Tiles/Player4/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(220, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile4" parent="Tiles/Player4/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(330, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile5" parent="Tiles/Player4/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(440, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile6" parent="Tiles/Player4/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(550, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile7" parent="Tiles/Player4/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(660, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile8" parent="Tiles/Player4/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(770, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile9" parent="Tiles/Player4/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(880, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile10" parent="Tiles/Player4/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(990, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile11" parent="Tiles/Player4/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(1100, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile12" parent="Tiles/Player4/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(1210, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile13" parent="Tiles/Player4/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(1320, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile14" parent="Tiles/Player4/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(1430, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile15" parent="Tiles/Player4/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(1540, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile16" parent="Tiles/Player4/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(1650, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile17" parent="Tiles/Player4/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(1760, 0)
+scale = Vector2(1, 1)
 
 [node name="Tile18" parent="Tiles/Player4/Table/TopPile" instance=ExtResource("3_oj160")]
 position = Vector2(1870, 0)
+scale = Vector2(1, 1)
 
 [node name="Discard" type="Node2D" parent="Tiles"]
 position = Vector2(460, 362)
@@ -748,112 +934,139 @@ script = ExtResource("4_kud7w")
 [node name="Line1" type="Node2D" parent="Tiles/Discard"]
 
 [node name="Tile" parent="Tiles/Discard/Line1" instance=ExtResource("3_oj160")]
+scale = Vector2(1, 1)
 is_face_down = false
 
 [node name="Tile2" parent="Tiles/Discard/Line1" instance=ExtResource("3_oj160")]
 position = Vector2(100, 0)
+scale = Vector2(1, 1)
 is_face_down = false
 
 [node name="Tile3" parent="Tiles/Discard/Line1" instance=ExtResource("3_oj160")]
 position = Vector2(200, 0)
+scale = Vector2(1, 1)
 is_face_down = false
 
 [node name="Tile4" parent="Tiles/Discard/Line1" instance=ExtResource("3_oj160")]
 position = Vector2(300, 0)
+scale = Vector2(1, 1)
 is_face_down = false
 
 [node name="Tile5" parent="Tiles/Discard/Line1" instance=ExtResource("3_oj160")]
 position = Vector2(400, 0)
+scale = Vector2(1, 1)
 is_face_down = false
 
 [node name="Tile6" parent="Tiles/Discard/Line1" instance=ExtResource("3_oj160")]
 position = Vector2(500, 0)
+scale = Vector2(1, 1)
 is_face_down = false
 
 [node name="Tile7" parent="Tiles/Discard/Line1" instance=ExtResource("3_oj160")]
 position = Vector2(600, 0)
+scale = Vector2(1, 1)
 is_face_down = false
 
 [node name="Tile8" parent="Tiles/Discard/Line1" instance=ExtResource("3_oj160")]
 position = Vector2(700, 0)
+scale = Vector2(1, 1)
 is_face_down = false
 
 [node name="Tile9" parent="Tiles/Discard/Line1" instance=ExtResource("3_oj160")]
 position = Vector2(800, 0)
+scale = Vector2(1, 1)
 is_face_down = false
 
 [node name="Tile10" parent="Tiles/Discard/Line1" instance=ExtResource("3_oj160")]
 position = Vector2(900, 0)
+scale = Vector2(1, 1)
 is_face_down = false
 
 [node name="Tile11" parent="Tiles/Discard/Line1" instance=ExtResource("3_oj160")]
 position = Vector2(1000, 0)
+scale = Vector2(1, 1)
 is_face_down = false
 
 [node name="Tile12" parent="Tiles/Discard/Line1" instance=ExtResource("3_oj160")]
 position = Vector2(1100, 0)
+scale = Vector2(1, 1)
 is_face_down = false
 
 [node name="Tile13" parent="Tiles/Discard/Line1" instance=ExtResource("3_oj160")]
 position = Vector2(1200, 0)
+scale = Vector2(1, 1)
 is_face_down = false
 
 [node name="Tile14" parent="Tiles/Discard/Line1" instance=ExtResource("3_oj160")]
 position = Vector2(1300, 0)
+scale = Vector2(1, 1)
 is_face_down = false
 
 [node name="Tile15" parent="Tiles/Discard/Line1" instance=ExtResource("3_oj160")]
 position = Vector2(1400, 0)
+scale = Vector2(1, 1)
 is_face_down = false
 
 [node name="Tile16" parent="Tiles/Discard/Line1" instance=ExtResource("3_oj160")]
 position = Vector2(1500, 0)
+scale = Vector2(1, 1)
 is_face_down = false
 
 [node name="Tile17" parent="Tiles/Discard/Line1" instance=ExtResource("3_oj160")]
 position = Vector2(1600, 0)
+scale = Vector2(1, 1)
 is_face_down = false
 
 [node name="Tile18" parent="Tiles/Discard/Line1" instance=ExtResource("3_oj160")]
 position = Vector2(1700, 0)
+scale = Vector2(1, 1)
 is_face_down = false
 
 [node name="Tile19" parent="Tiles/Discard/Line1" instance=ExtResource("3_oj160")]
 position = Vector2(1800, 0)
+scale = Vector2(1, 1)
 is_face_down = false
 
 [node name="Tile20" parent="Tiles/Discard/Line1" instance=ExtResource("3_oj160")]
 position = Vector2(1900, 0)
+scale = Vector2(1, 1)
 is_face_down = false
 
 [node name="Tile21" parent="Tiles/Discard/Line1" instance=ExtResource("3_oj160")]
 position = Vector2(2000, 0)
+scale = Vector2(1, 1)
 is_face_down = false
 
 [node name="Line2" type="Node2D" parent="Tiles/Discard"]
 position = Vector2(0, 140)
 
 [node name="Tile" parent="Tiles/Discard/Line2" instance=ExtResource("3_oj160")]
+scale = Vector2(1, 1)
 is_face_down = false
 
 [node name="Tile2" parent="Tiles/Discard/Line2" instance=ExtResource("3_oj160")]
 position = Vector2(100, 0)
+scale = Vector2(1, 1)
 is_face_down = false
 
 [node name="Tile3" parent="Tiles/Discard/Line2" instance=ExtResource("3_oj160")]
 position = Vector2(200, 0)
+scale = Vector2(1, 1)
 is_face_down = false
 
 [node name="Tile4" parent="Tiles/Discard/Line2" instance=ExtResource("3_oj160")]
 position = Vector2(300, 0)
+scale = Vector2(1, 1)
 is_face_down = false
 
 [node name="Tile5" parent="Tiles/Discard/Line2" instance=ExtResource("3_oj160")]
 position = Vector2(400, 0)
+scale = Vector2(1, 1)
 is_face_down = false
 
 [node name="Tile6" parent="Tiles/Discard/Line2" instance=ExtResource("3_oj160")]
 position = Vector2(500, 0)
+scale = Vector2(1, 1)
 is_face_down = false
 
 [node name="Line3" type="Node2D" parent="Tiles/Discard"]

@@ -15,7 +15,6 @@ func add_tile_to_players_table(tile):
 		return
 	
 	var current_line = $BottomLine if total_tile_in_bottom_line < max_card_per_line else $TopLine
-	tile.transform.position.x = (current_line_total - 1) * space_between_tiles
+	tile.position.x = current_line_total * space_between_tiles
 	tile.is_face_down = true # All cards here are face down
-	tile.parent = current_line
-	
+	current_line.add_child(tile)
