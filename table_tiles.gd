@@ -1,4 +1,4 @@
-class_name PlayerTable
+class_name TableTiles
 extends Node2D
 
 @export var space_between_tiles = 130

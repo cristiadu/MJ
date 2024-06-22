@@ -19,5 +19,5 @@ func _ready():
 	$Sprite2D.set_modulate(player_colors[player_number].overlay)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass

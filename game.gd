@@ -31,6 +31,7 @@ func _ready():
 		for i in range(tile.count):
 			tile_object = tile_scene.instantiate()
 			tile_object.init(
+				0,
 				tile.type, 
 				tile.resource, 
 				tile.suit if tile.has("suit") else "", 
