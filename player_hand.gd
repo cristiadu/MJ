@@ -26,7 +26,8 @@ func add_tile_to_hand(tile, is_face_down = true):
 
 
 func reorder_tiles():
+	var tween = create_tween()
+	tween.pause()
 	for tile in get_children():
-		tile.position.y = 0 # This is relative to the player's hand.
-		tile.position.x = tile.order * space_between_tiles
-		print(tile.order)
+		tween.tween_property(tile, "position", Vector2(tile.order * space_between_tiles, 0), 0.05)
+		tween.play()

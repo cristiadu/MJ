@@ -6,6 +6,10 @@ extends Area2D
 @export var order = 1
 
 @onready var hand = get_parent()
+@onready var viewport_size = get_viewport_rect().size
+@onready var collision_shape_size = get_collision_shape_size()
+@onready var viewport = get_viewport_rect()
+
 
 var type = "None"
 var honor = ""
@@ -45,11 +49,13 @@ func _on_Tile_input_event(_viewport, event, _shape_idx):
 				tween.tween_property(self, "scale", Vector2(1.2, 1.2), 0.2)
 				tween.play()
 			elif not event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-				# The left mouse button was released
-				tween.tween_property(self, "scale", Vector2(1, 1), 0.2)
-				tween.play()
-				self.dragging = false
-				calculate_new_order()
+				stop_dragging()
+
+
+func stop_dragging():
+	self.dragging = false
+	create_tween().tween_property(self, "scale", Vector2(1, 1), 0.2)
+	calculate_new_order()
 
 
 func calculate_new_order():
@@ -62,7 +68,7 @@ func calculate_new_order():
 	for tile in tiles:
 		if tile == self or not tile.draggable: # If tile is a fixed one, don't move it.
 			continue
-		var distance = self.global_position.distance_to(tile.global_position)
+		var distance = self.global_position.distance_to(Vector2(tile.global_position.x, 0))
 		if distance < closest_distance:
 			closest_distance = distance
 			closest_tile = tile
@@ -87,13 +93,28 @@ func calculate_new_order():
 # Called every physics frame. 'delta' is the elapsed time since the previous physics frame.
 func _physics_process(_delta):
 	if self.draggable and self.dragging:
+		var mouse_position = get_global_mouse_position()
+		if not self.viewport.has_point(mouse_position):
+			# Mouse is outside the viewport
+			stop_dragging()
+			
 		# The tile is being dragged
 		# Move the tile to the mouse's position, adjusted by the drag offset
-		self.global_position = get_global_mouse_position() + self.drag_offset
+		var new_position = mouse_position + self.drag_offset
+		var factor = 0.3
+		self.global_position.x = clamp(new_position.x, (collision_shape_size.x * factor), viewport_size.x - (collision_shape_size.x  * factor))
+		self.global_position.y = clamp(new_position.y, (collision_shape_size.y * factor), viewport_size.y - (collision_shape_size.y  * factor))
 
+
+func get_collision_shape_size():
+	var collision_shape = $CollisionShape2D.shape
+	if collision_shape:
+		return collision_shape.get_rect().size * 2 # For a RectangleShape2D, size is twice the extents
+	return Vector2.ZERO # Default to zero if no shape is found
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if self.draggable and self.dragging and not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		# The left mouse button was released outside of the _on_Tile_input_event method
-		dragging = false
+		self.dragging = false
