@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bv3lqh4tfpnki"]
+[gd_scene load_steps=12 format=3 uid="uid://bv3lqh4tfpnki"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_6i4ir"]
 [ext_resource type="PackedScene" uid="uid://dg5qqqe5yibgh" path="res://table.tscn" id="1_ie33v"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://discard.gd" id="4_kud7w"]
 [ext_resource type="Script" path="res://table_tiles.gd" id="5_gvm74"]
 [ext_resource type="Script" path="res://CPU.gd" id="6_k4jhx"]
+[ext_resource type="Script" path="res://table.gd" id="8_x2g4q"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_uqkq3"]
 
@@ -31,6 +32,27 @@ scale = Vector2(2, 1.3)
 [node name="Player1" parent="HUD" instance=ExtResource("2_fpx23")]
 position = Vector2(960, 998)
 player_name = "Player 1"
+
+[node name="DiscardButton" type="Button" parent="HUD/Player1"]
+offset_left = 96.0
+offset_top = -79.0
+offset_right = 264.0
+offset_bottom = -38.0
+text = "Discard Tile"
+
+[node name="DrawTileButton" type="Button" parent="HUD/Player1"]
+offset_left = 96.0
+offset_top = 26.0
+offset_right = 264.0
+offset_bottom = 67.0
+text = "Draw Tile"
+
+[node name="SpecialPlayButton" type="Button" parent="HUD/Player1"]
+offset_left = 96.0
+offset_top = -27.0
+offset_right = 264.0
+offset_bottom = 14.0
+text = "PONG!"
 
 [node name="Player2" parent="HUD" instance=ExtResource("2_fpx23")]
 position = Vector2(960, 82)
@@ -96,6 +118,7 @@ position = Vector2(0, 420)
 position = Vector2(0, 560)
 
 [node name="Table" type="Node2D" parent="Tiles"]
+script = ExtResource("8_x2g4q")
 
 [node name="North" type="Node2D" parent="Tiles/Table"]
 position = Vector2(400, 746)
