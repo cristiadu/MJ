@@ -7,6 +7,10 @@ var current_line = 1
 var max_lines = 5
 
 func add_tile_to_discard_pile(tile):
+	if current_line > max_lines:
+		print("Error, max number of lines reached for discard pile!")
+		return
+		
 	var current_line_node = get_node("Line" + str(current_line))
 	var total_tiles_in_line = current_line_node.get_child_count()
 	

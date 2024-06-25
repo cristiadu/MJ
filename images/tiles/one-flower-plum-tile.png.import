@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://curtbs1ca4mxc"
-path="res://.godot/imported/tile2.png-db06549f194c524567ddadaf65cc9187.ctex"
+uid="uid://cvwcfohl42158"
+path="res://.godot/imported/one-flower-plum-tile.png-17fa909552798571e6b6793e2a34437a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/tile2.png"
-dest_files=["res://.godot/imported/tile2.png-db06549f194c524567ddadaf65cc9187.ctex"]
+source_file="res://images/tiles/one-flower-plum-tile.png"
+dest_files=["res://.godot/imported/one-flower-plum-tile.png-17fa909552798571e6b6793e2a34437a.ctex"]
 
 [params]
 

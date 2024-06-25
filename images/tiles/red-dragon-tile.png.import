@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0n5bplgve8d3"
-path="res://.godot/imported/back_tile.png-cc6270dba311d35d03d1baf2c79f5400.ctex"
+uid="uid://ddcdtnypm8fdc"
+path="res://.godot/imported/red-dragon-tile.png-bafac3a17ad6dd3006bb83d8a66736c8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/back_tile.png"
-dest_files=["res://.godot/imported/back_tile.png-cc6270dba311d35d03d1baf2c79f5400.ctex"]
+source_file="res://images/tiles/red-dragon-tile.png"
+dest_files=["res://.godot/imported/red-dragon-tile.png-bafac3a17ad6dd3006bb83d8a66736c8.ctex"]
 
 [params]
 

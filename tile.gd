@@ -11,7 +11,7 @@ extends Area2D
 
 
 var type = "None"
-var honor = ""
+var subtype = ""
 var suit = ""
 var number = ""
 var resource = "res://images/tile.png"
@@ -19,10 +19,10 @@ var resource = "res://images/tile.png"
 var dragging = false  # Whether the tile is being dragged
 var drag_offset = Vector2()  # The offset between the mouse and the tile's position when dragging starts
 
-func init(o, t, res, s, h, n):
+func init(o, t, res, s, st, n):
 	self.order = o
 	self.type = t
-	self.honor = h
+	self.subtype = st
 	self.suit = s
 	self.number = n
 	self.resource = res
@@ -30,11 +30,16 @@ func init(o, t, res, s, h, n):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$ImageFaceDown.visible = is_face_down
-	$ImageFaceUp.visible = not is_face_down
 	$ImageFaceUp.texture = load(resource)
+	change_face_down_or_up(self.is_face_down)
 	input_event.connect(_on_Tile_input_event)
 	
+
+func change_face_down_or_up(set_face_down):
+	self.is_face_down = set_face_down
+	$ImageFaceDown.visible = is_face_down
+	$ImageFaceUp.visible = not is_face_down
+
 
 func _on_Tile_input_event(_viewport, event, _shape_idx):
 	if self.draggable:

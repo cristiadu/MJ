@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dhhugy5lno7w1"
-path="res://.godot/imported/tile3.png-a419c96a69df7ef7b813c466a18518bd.ctex"
+uid="uid://c1q6j5vam5nhb"
+path="res://.godot/imported/two-bamboo-tile.png-26ff38b923a7fd1aa07017773f2e03b7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/tile3.png"
-dest_files=["res://.godot/imported/tile3.png-a419c96a69df7ef7b813c466a18518bd.ctex"]
+source_file="res://images/tiles/two-bamboo-tile.png"
+dest_files=["res://.godot/imported/two-bamboo-tile.png-26ff38b923a7fd1aa07017773f2e03b7.ctex"]
 
 [params]
 

@@ -5,7 +5,8 @@ signal should_reorder_tiles
 
 @export var space_between_tiles = 100
 @export var tiles_on_hand_draggable = false
-var max_card_per_hand = 14
+@export var initial_tile_per_hand = 13
+@export var max_tile_per_hand = 14
 
 func _ready():
 	self.should_reorder_tiles.connect(reorder_tiles)
@@ -14,7 +15,7 @@ func _ready():
 func add_tile_to_hand(tile, is_face_down = true):
 	var total_tiles_in_hand = self.get_child_count()
 	
-	if total_tiles_in_hand >= max_card_per_hand:
+	if total_tiles_in_hand >= max_tile_per_hand:
 		print("Cannot add another tile to player hand, reached max number!")
 		return
 	
