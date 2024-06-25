@@ -1,6 +1,31 @@
 class_name HumanPlayer
 extends Node2D
 
-func play_round():
-	# What the player can do here.
+func play():
+	# play the round here.
+	pass
+
+
+
+func draw_tile():
+	pass
+
+
+
+func discard():
+	pass
+
+
+
+func check_and_play_pong():
+	pass
+
+
+
+func check_and_play_seung():
+	pass
+
+
+
+func check_and_play_gong():
 	pass
