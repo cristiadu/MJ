@@ -6,7 +6,6 @@ extends Area2D
 @export var order = 1
 
 @onready var hand = get_parent()
-@onready var viewport_size = get_viewport_rect().size
 @onready var collision_shape_size = get_collision_shape_size()
 @onready var viewport = get_viewport_rect()
 
@@ -39,21 +38,23 @@ func _ready():
 
 func _on_Tile_input_event(_viewport, event, _shape_idx):
 	if self.draggable:
-		var tween = create_tween()
-		tween.pause()
 		if event is InputEventMouseButton:
 			if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 				# The left mouse button was pressed
-				self.dragging = true
-				self.drag_offset = self.global_position - event.global_position
-				tween.tween_property(self, "scale", Vector2(1.2, 1.2), 0.2)
-				tween.play()
+				start_dragging(event.global_position)
 			elif not event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 				stop_dragging()
 
 
+func start_dragging(mouse_position):
+	self.dragging = true
+	self.drag_offset = self.global_position - mouse_position
+	create_tween().tween_property(self, "scale", Vector2(1.2, 1.2), 0.2)
+
+
 func stop_dragging():
 	self.dragging = false
+	self.drag_offset = Vector2()
 	create_tween().tween_property(self, "scale", Vector2(1, 1), 0.2)
 	calculate_new_order()
 
@@ -66,9 +67,9 @@ func calculate_new_order():
 
 	# Iterate through all tiles to find the closest one
 	for tile in tiles:
-		if tile == self or not tile.draggable: # If tile is a fixed one, don't move it.
+		if tile == self:
 			continue
-		var distance = self.global_position.distance_to(Vector2(tile.global_position.x, 0))
+		var distance = self.global_position.distance_to(Vector2(tile.global_position.x, tile.global_position.y))
 		if distance < closest_distance:
 			closest_distance = distance
 			closest_tile = tile
@@ -94,16 +95,13 @@ func calculate_new_order():
 func _physics_process(_delta):
 	if self.draggable and self.dragging:
 		var mouse_position = get_global_mouse_position()
+		var new_position = mouse_position + self.drag_offset
+		var factor = 0.3
+		self.global_position.x = clamp(new_position.x, (collision_shape_size.x * factor), self.viewport.size.x - (collision_shape_size.x  * factor))
+		self.global_position.y = clamp(new_position.y, (collision_shape_size.y * factor), self.viewport.size.y - (collision_shape_size.y  * factor))
 		if not self.viewport.has_point(mouse_position):
 			# Mouse is outside the viewport
 			stop_dragging()
-			
-		# The tile is being dragged
-		# Move the tile to the mouse's position, adjusted by the drag offset
-		var new_position = mouse_position + self.drag_offset
-		var factor = 0.3
-		self.global_position.x = clamp(new_position.x, (collision_shape_size.x * factor), viewport_size.x - (collision_shape_size.x  * factor))
-		self.global_position.y = clamp(new_position.y, (collision_shape_size.y * factor), viewport_size.y - (collision_shape_size.y  * factor))
 
 
 func get_collision_shape_size():
@@ -115,6 +113,6 @@ func get_collision_shape_size():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if self.draggable and self.dragging and not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+	if self.dragging and not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		# The left mouse button was released outside of the _on_Tile_input_event method
-		self.dragging = false
+		stop_dragging()

@@ -1,7 +1,7 @@
 class_name PlayerHand
 extends Node2D
 
-signal should_reorder_tiles()
+signal should_reorder_tiles
 
 @export var space_between_tiles = 100
 @export var tiles_on_hand_draggable = false
@@ -26,8 +26,5 @@ func add_tile_to_hand(tile, is_face_down = true):
 
 
 func reorder_tiles():
-	var tween = create_tween()
-	tween.pause()
 	for tile in get_children():
-		tween.tween_property(tile, "position", Vector2(tile.order * space_between_tiles, 0), 0.05)
-		tween.play()
+		create_tween().tween_property(tile, "position", Vector2(tile.order * space_between_tiles, 0), 0.2)
