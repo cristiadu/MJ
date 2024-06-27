@@ -309,9 +309,7 @@ func _ready():
 			self.game_tiles.append(tile_object)
 
 	game_tiles.shuffle()
-	#draw_table_tiles()
-	draw_initial_player_tiles()
-
+	draw_table_tiles()
 
 
 func draw_table_tiles():
@@ -334,26 +332,4 @@ func draw_table_tiles():
 	end_index = self.game_tiles_currently_unassigned_index + $Tiles/Table/South.max_tile_per_line * 2
 	for tile_instance in self.game_tiles.slice(self.game_tiles_currently_unassigned_index, end_index):
 		$Tiles/Table/South.add_tile_to_players_table(tile_instance)
-	self.game_tiles_currently_unassigned_index = end_index
-
-
-func draw_initial_player_tiles():
-	var end_index = self.game_tiles_currently_unassigned_index + $Tiles/Player1/Hand.initial_tile_per_hand
-	for tile_instance in self.game_tiles.slice(self.game_tiles_currently_unassigned_index, end_index):
-		$Tiles/Player1/Hand.add_tile_to_hand(tile_instance, false)
-	self.game_tiles_currently_unassigned_index = end_index
-	
-	end_index = self.game_tiles_currently_unassigned_index + $Tiles/Player2/Hand.initial_tile_per_hand
-	for tile_instance in self.game_tiles.slice(self.game_tiles_currently_unassigned_index, end_index):
-		$Tiles/Player2/Hand.add_tile_to_hand(tile_instance, false)
-	self.game_tiles_currently_unassigned_index = end_index
-	
-	end_index = self.game_tiles_currently_unassigned_index + $Tiles/Player3/Hand.initial_tile_per_hand
-	for tile_instance in self.game_tiles.slice(self.game_tiles_currently_unassigned_index, end_index):
-		$Tiles/Player3/Hand.add_tile_to_hand(tile_instance, false)
-	self.game_tiles_currently_unassigned_index = end_index
-	
-	end_index = self.game_tiles_currently_unassigned_index + $Tiles/Player4/Hand.initial_tile_per_hand
-	for tile_instance in self.game_tiles.slice(self.game_tiles_currently_unassigned_index, end_index):
-		$Tiles/Player4/Hand.add_tile_to_hand(tile_instance, false)
 	self.game_tiles_currently_unassigned_index = end_index
