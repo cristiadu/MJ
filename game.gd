@@ -307,9 +307,13 @@ func _ready():
 				tile.subtype if tile.has("subtype") else "", 
 				tile.number if tile.has("number") else -1)
 			self.game_tiles.append(tile_object)
+	start_game()
 
+
+func start_game():
 	game_tiles.shuffle()
 	draw_table_tiles()
+	$Tiles/Table.start_round()
 
 
 func draw_table_tiles():

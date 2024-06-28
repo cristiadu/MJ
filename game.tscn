@@ -1,7 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://bv3lqh4tfpnki"]
+[gd_scene load_steps=13 format=3 uid="uid://bv3lqh4tfpnki"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_6i4ir"]
-[ext_resource type="PackedScene" uid="uid://dg5qqqe5yibgh" path="res://table.tscn" id="1_ie33v"]
+[ext_resource type="PackedScene" uid="uid://dg5qqqe5yibgh" path="res://table_area.tscn" id="1_ie33v"]
 [ext_resource type="Script" path="res://HUD.gd" id="2_fll6r"]
 [ext_resource type="PackedScene" uid="uid://eg0uo0av0pnq" path="res://user_portrait.tscn" id="2_fpx23"]
 [ext_resource type="Script" path="res://Human.gd" id="3_fx0ap"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://table_tiles.gd" id="5_gvm74"]
 [ext_resource type="Script" path="res://CPU.gd" id="6_k4jhx"]
 [ext_resource type="Script" path="res://table.gd" id="8_x2g4q"]
+[ext_resource type="PackedScene" uid="uid://bq8m5xya83pmc" path="res://die.tscn" id="11_bn0d6"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_uqkq3"]
 
@@ -25,7 +26,7 @@ position = Vector2(960, 540)
 scale = Vector2(1920, 1080)
 texture = SubResource("CanvasTexture_uqkq3")
 
-[node name="Table" parent="HUD" instance=ExtResource("1_ie33v")]
+[node name="TableArea" parent="HUD" instance=ExtResource("1_ie33v")]
 position = Vector2(960, 512)
 scale = Vector2(2, 1.3)
 
@@ -175,3 +176,35 @@ script = ExtResource("3_fx0ap")
 position = Vector2(310, 846)
 script = ExtResource("4_58fn3")
 tiles_on_hand_draggable = true
+
+[node name="Dice" type="Node2D" parent="."]
+position = Vector2(1700, 40)
+
+[node name="DiceOverlay" type="ColorRect" parent="Dice"]
+offset_left = -40.0
+offset_top = -29.0
+offset_right = 160.0
+offset_bottom = 56.0
+color = Color(0, 0, 0, 0.556863)
+
+[node name="Label" type="Label" parent="Dice/DiceOverlay"]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 55.0
+offset_right = 158.0
+offset_bottom = 83.0
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/line_spacing = 0
+theme_override_font_sizes/font_size = 20
+text = "DICE ROLLS"
+
+[node name="Die1" parent="Dice" instance=ExtResource("11_bn0d6")]
+
+[node name="Die2" parent="Dice" instance=ExtResource("11_bn0d6")]
+position = Vector2(60, 0)
+
+[node name="Die3" parent="Dice" instance=ExtResource("11_bn0d6")]
+position = Vector2(120, 0)

@@ -13,8 +13,8 @@ signal dragging_started
 signal dragging_stopped
 
 enum ShiftDirection {
-    MOVE_LEFT,
-    MOVE_RIGHT
+	MOVE_LEFT,
+	MOVE_RIGHT
 }
 
 const DRAG_SCALE_FACTOR = Vector2(1.2, 1.2)
@@ -38,6 +38,7 @@ func init(o, t, res, s, st, n):
 	self.number = n
 	self.resource = res
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$ImageFaceUp.texture = load(resource)
@@ -46,10 +47,12 @@ func _ready():
 	dragging_started.connect(start_dragging)
 	dragging_stopped.connect(stop_dragging)
 
+
 func change_face_down_or_up(set_face_down):
 	self.is_face_down = set_face_down
 	$ImageFaceDown.visible = is_face_down
 	$ImageFaceUp.visible = not is_face_down
+
 
 func _on_Tile_input_event(_viewport, event, _shape_idx):
 	if self.draggable:
@@ -60,16 +63,19 @@ func _on_Tile_input_event(_viewport, event, _shape_idx):
 			elif not event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 				dragging_stopped.emit()
 
+
 func start_dragging(mouse_position):
 	self.dragging = true
 	self.drag_offset = self.global_position - mouse_position
 	create_tween().tween_property(self, "scale", DRAG_SCALE_FACTOR, 0.2)
+
 
 func stop_dragging():
 	self.dragging = false
 	self.drag_offset = Vector2()
 	create_tween().tween_property(self, "scale", NORMAL_SCALE_FACTOR, 0.2)
 	calculate_new_order()
+
 
 func calculate_new_order():
 	var tiles = hand.get_children() # Assuming 'hand' is a reference to the parent container of the tiles
