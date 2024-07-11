@@ -11,13 +11,8 @@ var player_colors = {
 }
 
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$PlayerName.text = player_name
 	$PlayerName.add_theme_color_override("font_color", player_colors[player_number].label)
 	$Sprite2D.set_modulate(player_colors[player_number].overlay)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass

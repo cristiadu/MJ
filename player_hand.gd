@@ -13,7 +13,7 @@ func _ready():
 	
 
 func add_tile_to_hand(tile, is_face_down = true):
-	var total_tiles_in_hand = self.get_child_count()
+	var total_tiles_in_hand = self.get_total_tiles_in_hand()
 	
 	if total_tiles_in_hand >= max_tile_per_hand:
 		print("Cannot add another tile to player hand, reached max number!")
@@ -24,6 +24,14 @@ func add_tile_to_hand(tile, is_face_down = true):
 	tile.order = total_tiles_in_hand
 	tile.is_face_down = is_face_down
 	add_child(tile)
+
+
+func get_total_tiles_in_hand():
+	return get_child_count()
+
+
+func position_of_next_tile():
+	return Vector2(get_total_tiles_in_hand() * space_between_tiles, 0)
 
 
 func reorder_tiles():

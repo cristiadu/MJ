@@ -1,6 +1,8 @@
 class_name CPUPlayer
 extends Node2D
 
+@export var player_wind = ""
+
 func play():
 	# play the round here.
 	pass

@@ -291,7 +291,6 @@ var tiles = [
 ]
 
 var game_tiles = []
-var game_tiles_currently_unassigned_index = 0
 var tile_scene = preload("res://tile.tscn")
 
 func _ready():
@@ -312,28 +311,5 @@ func _ready():
 
 func start_game():
 	game_tiles.shuffle()
-	draw_table_tiles()
+	$Tiles/Table.draw_table_tiles(game_tiles)
 	$Tiles/Table.start_round()
-
-
-func draw_table_tiles():
-	# First X cards to each pile on each side of the table.
-	var end_index = self.game_tiles_currently_unassigned_index + $Tiles/Table/East.max_tile_per_line * 2
-	for tile_instance in self.game_tiles.slice(self.game_tiles_currently_unassigned_index, end_index):
-		$Tiles/Table/East.add_tile_to_players_table(tile_instance)
-	self.game_tiles_currently_unassigned_index = end_index
-	
-	end_index = self.game_tiles_currently_unassigned_index + $Tiles/Table/West.max_tile_per_line * 2
-	for tile_instance in self.game_tiles.slice(self.game_tiles_currently_unassigned_index, end_index):
-		$Tiles/Table/West.add_tile_to_players_table(tile_instance)
-	self.game_tiles_currently_unassigned_index = end_index
-	
-	end_index = self.game_tiles_currently_unassigned_index + $Tiles/Table/North.max_tile_per_line * 2
-	for tile_instance in self.game_tiles.slice(self.game_tiles_currently_unassigned_index, end_index):
-		$Tiles/Table/North.add_tile_to_players_table(tile_instance)
-	self.game_tiles_currently_unassigned_index = end_index
-	
-	end_index = self.game_tiles_currently_unassigned_index + $Tiles/Table/South.max_tile_per_line * 2
-	for tile_instance in self.game_tiles.slice(self.game_tiles_currently_unassigned_index, end_index):
-		$Tiles/Table/South.add_tile_to_players_table(tile_instance)
-	self.game_tiles_currently_unassigned_index = end_index

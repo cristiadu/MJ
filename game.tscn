@@ -34,25 +34,28 @@ scale = Vector2(2, 1.3)
 position = Vector2(960, 998)
 player_name = "Player 1"
 
-[node name="DiscardButton" type="Button" parent="HUD/Player1"]
-offset_left = 96.0
-offset_top = -79.0
-offset_right = 264.0
-offset_bottom = -38.0
+[node name="Buttons" type="Node2D" parent="HUD/Player1"]
+position = Vector2(-960, -998)
+
+[node name="DiscardButton" type="Button" parent="HUD/Player1/Buttons"]
+offset_left = 1056.0
+offset_top = 919.0
+offset_right = 1224.0
+offset_bottom = 960.0
 text = "Discard Tile"
 
-[node name="DrawTileButton" type="Button" parent="HUD/Player1"]
-offset_left = 96.0
-offset_top = 26.0
-offset_right = 264.0
-offset_bottom = 67.0
+[node name="DrawTileButton" type="Button" parent="HUD/Player1/Buttons"]
+offset_left = 1056.0
+offset_top = 1024.0
+offset_right = 1224.0
+offset_bottom = 1065.0
 text = "Draw Tile"
 
-[node name="SpecialPlayButton" type="Button" parent="HUD/Player1"]
-offset_left = 96.0
-offset_top = -27.0
-offset_right = 264.0
-offset_bottom = 14.0
+[node name="SpecialPlayButton" type="Button" parent="HUD/Player1/Buttons"]
+offset_left = 1056.0
+offset_top = 971.0
+offset_right = 1224.0
+offset_bottom = 1012.0
 text = "PONG!"
 
 [node name="Player2" parent="HUD" instance=ExtResource("2_fpx23")]

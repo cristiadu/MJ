@@ -2,8 +2,6 @@ extends RigidBody2D
 
 @export var current_roll = 1
 
-var start_row_timestamp
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
