@@ -8,7 +8,6 @@ extends Node2D
 @onready var second_die = get_parent().get_parent().get_node("Dice/Die2")
 @onready var third_die = get_parent().get_parent().get_node("Dice/Die3")
 
-
 var dice_rolls = []
 
 # Called when the node enters the scene tree for the first time.
@@ -21,7 +20,7 @@ func start_round():
 	self.dice_rolls = roll_three_d6()
 	self.number_rolled_dice = dice_rolls.reduce(func(accum, number): return accum + number)
 	select_draw_wind()
-	#draw_initial_tiles()
+	draw_initial_tiles()
 
 
 func roll_three_d6():
@@ -60,28 +59,37 @@ func draw_initial_tiles():
 	# Draws all the tiles for all 4 players, following the order of the wind and doing 4 by 4 each draw until they all have the max of tiles.
 	var players_with_max_tiles = 0
 	var players_hand = [get_parent().get_node("Player1/Hand"), get_parent().get_node("Player2/Hand"), get_parent().get_node("Player3/Hand"), get_parent().get_node("Player4/Hand")]
+	var pile_wind = get_node(self.current_draw_wind)
+	pile_wind.current_pile_draw_position = number_rolled_dice
 	while(players_with_max_tiles < 4):
 		for player_number in range(1, 5):
-			draw_tiles(player_number, 4)
-			if players_hand[player_number - 1].get_total_tiles_in_hand() == players_hand[player_number - 1].max_tile_per_hand:
+			if players_hand[player_number - 1].get_total_tiles_in_hand() == players_hand[player_number - 1].initial_tile_per_hand:
+				print("Player "+str(player_number) + " is ready!")
 				players_with_max_tiles += 1
+			else:
+				var remainder = players_hand[player_number - 1].get_total_tiles_in_hand() % 4
+				print("Player "+str(player_number) + " is drawing "+str(4 if remainder % 4 == 0 else remainder)+" tiles!")
+				draw_tiles(player_number, 4 if remainder % 4 == 0 else remainder)
+
 	
 
 func draw_tiles(player_number, number_of_tiles = 1):
 	var pile_wind = get_node(self.current_draw_wind)
 	var player_hand = get_parent().get_node("Player" + str(player_number) + "/Hand")
+	print("Draw"+str(number_of_tiles)+"::Player"+str(player_number))
 
 	var number_of_tiles_to_draw = number_of_tiles
-	if pile_wind.get_total_tiles() < number_of_tiles:
+	if (pile_wind.max_tile_per_line - pile_wind.current_pile_draw_position) < number_of_tiles/2:
+		var total_tiles = pile_wind.max_tile_per_line - pile_wind.current_pile_draw_position
+		number_of_tiles_to_draw = total_tiles
+		print("Changing the draw pile to "+self.current_draw_wind + "remaining tiles on previous draw pile: " + str(number_of_tiles_to_draw))
 		self.current_draw_wind = get_next_wind(self.current_draw_wind)
-		number_of_tiles_to_draw = pile_wind.get_total_tiles()
-		return
 
-	pile_wind.draw_tiles_to_player_hand(number_rolled_dice, player_hand, number_of_tiles_to_draw)
+	pile_wind.draw_tiles_to_player_hand(player_hand, number_of_tiles_to_draw)
 
 	number_of_tiles_to_draw = number_of_tiles - number_of_tiles_to_draw
 	if number_of_tiles_to_draw > 0:
-		draw_tiles(number_of_tiles_to_draw, player_number)
+		draw_tiles(player_number, number_of_tiles_to_draw)
 
 
 func draw_table_tiles(game_tiles):

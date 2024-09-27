@@ -40,4 +40,4 @@ func check_and_play_gong():
 
 
 func trigger_start():
-	table.draw_initial_tiles()
+	pass
