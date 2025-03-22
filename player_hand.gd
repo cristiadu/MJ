@@ -17,13 +17,14 @@ func add_tile_to_hand(tile, is_face_down = true):
 	
 	if total_tiles_in_hand >= max_tile_per_hand:
 		print("Cannot add another tile to player hand, reached max number!")
-		return
+		return false
 	
 	tile.draggable = tiles_on_hand_draggable
 	tile.position.x = total_tiles_in_hand * space_between_tiles
 	tile.order = total_tiles_in_hand
 	tile.is_face_down = is_face_down
 	add_child(tile)
+	return true
 
 
 func get_total_tiles_in_hand():
