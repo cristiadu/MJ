@@ -9,6 +9,7 @@ extends Node2D
 @onready var third_die = get_parent().get_parent().get_node("Dice/Die3")
 
 var dice_rolls = []
+var dice_animation_complete_count = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,17 +18,52 @@ func _ready():
 
 func start_round():
 	self.current_table_wind = get_next_wind(self.current_table_wind)
-	self.dice_rolls = roll_three_d6()
-	self.number_rolled_dice = dice_rolls.reduce(func(accum, number): return accum + number)
-	select_draw_wind()
-	draw_initial_tiles()
+	roll_dice_and_wait()
+	return
+
+
+# Roll dice and wait for animations to complete
+func roll_dice_and_wait():
+	# Reset counter
+	dice_animation_complete_count = 0
+	
+	# Connect dice animation completion signals
+	first_die.animation_completed.connect(_on_die_animation_completed)
+	second_die.animation_completed.connect(_on_die_animation_completed)
+	third_die.animation_completed.connect(_on_die_animation_completed)
+	
+	# Roll the dice
+	roll_three_d6()
+
+
+# Called when a die completes its animation
+func _on_die_animation_completed(_roll_value):
+	dice_animation_complete_count += 1
+	
+	# If all three dice are done, proceed with the game
+	if dice_animation_complete_count == 3:
+		# Disconnect signals to avoid memory leaks
+		first_die.animation_completed.disconnect(_on_die_animation_completed)
+		second_die.animation_completed.disconnect(_on_die_animation_completed)
+		third_die.animation_completed.disconnect(_on_die_animation_completed)
+		
+		# Calculate sum of dice
+		self.number_rolled_dice = dice_rolls.reduce(func(accum, number): return accum + number)
+		
+		# Continue with the game
+		select_draw_wind()
+		draw_initial_tiles()
 
 
 func roll_three_d6():
-	var first_roll = first_die.roll()
-	var second_roll = second_die.roll()
-	var third_roll = third_die.roll()
-	return [first_roll, second_roll, third_roll]
+	dice_rolls = []
+	
+	# Start all three rolls
+	dice_rolls.append(first_die.roll())
+	dice_rolls.append(second_die.roll())
+	dice_rolls.append(third_die.roll())
+	
+	return dice_rolls
 
 
 # Select which Table Pile will draw from
@@ -124,14 +160,19 @@ func draw_initial_tiles():
 			break
 
 
-func draw_tiles(player_number, number_of_tiles = 1):
+func draw_tiles(player_number, number_of_tiles = 1, recursion_depth = 0):
+	# Prevent infinite recursion
+	if recursion_depth > 8:  # Allow max 8 recursive calls (2 full circuits around winds)
+		print("WARNING: Maximum recursion depth reached in draw_tiles. Stopping to prevent stack overflow.")
+		return false
+		
 	# If no tiles needed, return success immediately
 	if number_of_tiles <= 0:
 		return true
 		
 	var pile_wind = get_node(self.current_draw_wind)
 	var player_hand = get_parent().get_node("Player" + str(player_number) + "/Hand")
-	print("Draw"+str(number_of_tiles)+"::Player"+str(player_number))
+	print("Draw"+str(number_of_tiles)+"::Player"+str(player_number)+", depth="+str(recursion_depth))
 	
 	# Check if we need to change winds due to position
 	if pile_wind.current_pile_draw_position > pile_wind.max_tile_per_line:
@@ -148,13 +189,15 @@ func draw_tiles(player_number, number_of_tiles = 1):
 		# Try all winds in sequence until we find one with tiles
 		var original_wind = self.current_draw_wind
 		var tried_all_winds = false
+		var winds_checked = 0
 		
-		while not pile_wind.has_available_tiles() and not tried_all_winds:
+		while not pile_wind.has_available_tiles() and not tried_all_winds and winds_checked < 4:
 			self.current_draw_wind = get_next_wind(self.current_draw_wind)
 			pile_wind = get_node(self.current_draw_wind)
+			winds_checked += 1
 			
 			# Check if we've gone full circle
-			if self.current_draw_wind == original_wind:
+			if self.current_draw_wind == original_wind or winds_checked >= 4:
 				tried_all_winds = true
 				print("Checked all winds, no available tiles found")
 				return false
@@ -192,13 +235,11 @@ func draw_tiles(player_number, number_of_tiles = 1):
 		else:
 			print("Continuing to draw from " + self.current_draw_wind + " at position " + str(pile_wind.current_pile_draw_position))
 		
-		# Recursively try to draw the remaining tiles
-		return draw_tiles(player_number, remaining_tiles_to_draw)
+		# Recursively try to draw the remaining tiles with incremented recursion depth
+		return draw_tiles(player_number, remaining_tiles_to_draw, recursion_depth + 1)
 	else:
-		# Failed to draw any tiles, try the next wind
-		print("Failed to draw from " + self.current_draw_wind + ", trying next wind")
-		self.current_draw_wind = get_next_wind(self.current_draw_wind)
-		return draw_tiles(player_number, number_of_tiles)
+		print("Failed to draw from " + self.current_draw_wind)
+		return false
 
 
 func draw_table_tiles(game_tiles):

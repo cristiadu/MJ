@@ -2,13 +2,16 @@ extends Node2D
 
 @export var space_between_tiles = 100
 
-var tiles_per_line = 15
+var tiles_per_line = 12
 var current_line = 1
-var max_lines = 5
+var max_lines = 8
 
 func add_tile_to_discard_pile(tile):
 	if current_line > max_lines:
 		print("Error, max number of lines reached for discard pile!")
+		# Disable the discard button
+		var discard_button = get_parent().get_parent().get_node("HUD/Player1/Buttons/DiscardButton")
+		discard_button.disabled = true
 		return
 		
 	var current_line_node = get_node("Line" + str(current_line))
@@ -20,6 +23,9 @@ func add_tile_to_discard_pile(tile):
 		
 		if current_line > max_lines:
 			print("Error, max number of lines reached for discard pile!")
+			# Disable the discard button
+			var discard_button = get_parent().get_parent().get_node("HUD/Player1/Buttons/DiscardButton")
+			discard_button.disabled = true
 			return
 		
 		current_line_node = get_node("Line" + str(current_line))

@@ -77,8 +77,6 @@ func draw_tiles_to_player_hand(player_hand, number_of_tiles):
 		var added_tile = player_hand.add_tile_to_hand(tile, player_hand.player.player_number != 1)
 		if added_tile:
 			tiles_added += 1
-		else:
-			break
 	
 	return tiles_added
 
