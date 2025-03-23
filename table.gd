@@ -103,6 +103,15 @@ func draw_initial_tiles():
 					else:
 						consecutive_failed_draws = 0
 						
+						# Check if player has drawn any flower tiles and needs extra tiles
+						current_tiles = players_hand[player_number - 1].get_total_tiles_in_hand()
+						if current_tiles < max_tiles:
+							print("Player "+str(player_number) + " likely drew flower tiles, drawing replacements...")
+							# Continue drawing until they have the correct number of tiles
+							var additional_tiles_needed = max_tiles - current_tiles
+							if additional_tiles_needed > 0:
+								draw_tiles(player_number, additional_tiles_needed)
+						
 						# Recheck if player now has max tiles after drawing
 						current_tiles = players_hand[player_number - 1].get_total_tiles_in_hand()
 						if current_tiles == max_tiles:

@@ -9,6 +9,8 @@ signal should_reorder_tiles
 @export var max_tile_per_hand = 14
 
 @onready var player = get_parent()
+@onready var exposed_tiles = get_parent().get_node("ExposedTiles")
+@export var space_between_exposed_tiles = 100
 
 func _ready():
 	self.should_reorder_tiles.connect(reorder_tiles)
@@ -16,6 +18,15 @@ func _ready():
 
 func add_tile_to_hand(tile, is_face_down = true):
 	var total_tiles_in_hand = self.get_total_tiles_in_hand()
+	
+	# Check if the tile is a flower
+	if tile.type == "flower":
+		print("Found flower tile: " + tile.subtype)
+		# Add to exposed tiles
+		add_tile_to_exposed_area(tile)
+		var table = get_node("/root/Game/Tiles/Table")
+		table.draw_tiles(player.player_number, 1)
+		return true
 	
 	if total_tiles_in_hand >= max_tile_per_hand:
 		print("Cannot add another tile to player hand, reached max number!")
@@ -31,6 +42,37 @@ func add_tile_to_hand(tile, is_face_down = true):
 	
 	# Reset position and rotation relative to the hand
 	tile.position = Vector2(total_tiles_in_hand * space_between_tiles, 0)
+	tile.rotation = 0
+	
+	return true
+
+
+func add_tile_to_exposed_area(tile):
+	# Flower tiles should always be face up
+	tile.change_face_down_or_up(false)
+	
+	# Add the tile to the exposed area
+	exposed_tiles.add_child(tile)
+	
+	# Get the logical index of this tile in the exposed_tiles grid
+	var index = exposed_tiles.get_child_count() - 1  # 0-based index
+	
+	# Fixed grid layout with 3 tiles per row
+	var tiles_per_row = 3
+	var row = int(index / tiles_per_row)  # Ensure integer division
+		
+	# Get the grid offset based on player number
+	var target_position = Vector2(row * space_between_exposed_tiles, 0)
+	
+	# Use a tween to ensure our positioning happens after any animation from table_tiles
+	# This will animate the tile to the correct position in the grid
+	var tween = create_tween()
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_CUBIC)
+	# Force immediate positioning first to avoid overlap during animation
+	tile.position = target_position
+	tween.tween_property(tile, "position", target_position, 0.3)
+	
 	tile.rotation = 0
 	
 	return true

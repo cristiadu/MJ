@@ -2,7 +2,7 @@ extends Node2D
 
 @export var space_between_tiles = 100
 
-var tiles_per_line = 21
+var tiles_per_line = 15
 var current_line = 1
 var max_lines = 5
 
@@ -26,5 +26,5 @@ func add_tile_to_discard_pile(tile):
 		total_tiles_in_line = current_line_node.get_child_count()
 		
 	tile.position.x = total_tiles_in_line * space_between_tiles
-	tile.is_face_down = false # all cards here are face up
+	tile.change_face_down_or_up(false) # all cards here are face up
 	current_line_node.add_child(tile)

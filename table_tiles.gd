@@ -157,7 +157,6 @@ func update_available_indices():
 
 func draw_tiles_from_current_draw_index(number_of_tiles):
 	var drawn_tiles = []
-	var tile_metadata = null
 	var tiles_to_draw = number_of_tiles
 	
 	while tiles_to_draw > 0:

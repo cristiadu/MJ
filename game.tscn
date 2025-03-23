@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bv3lqh4tfpnki"]
+[gd_scene load_steps=14 format=3 uid="uid://bv3lqh4tfpnki"]
 
 [ext_resource type="Script" uid="uid://cxf5sbmigsdk4" path="res://game.gd" id="1_6i4ir"]
 [ext_resource type="PackedScene" uid="uid://dg5qqqe5yibgh" path="res://table_area.tscn" id="1_ie33v"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://m6v1ncswpeif" path="res://table_tiles.gd" id="5_gvm74"]
 [ext_resource type="Script" uid="uid://b3lf7knn8dp7h" path="res://CPU.gd" id="6_k4jhx"]
 [ext_resource type="Script" uid="uid://yf7eu1ca8o4h" path="res://table.gd" id="8_x2g4q"]
+[ext_resource type="PackedScene" uid="uid://c2of4atalhefe" path="res://tile.tscn" id="9_iotsf"]
 [ext_resource type="PackedScene" uid="uid://bq8m5xya83pmc" path="res://die.tscn" id="11_bn0d6"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_uqkq3"]
@@ -83,6 +84,10 @@ position = Vector2(358, 846)
 script = ExtResource("4_58fn3")
 tiles_on_hand_draggable = true
 
+[node name="ExposedTiles" type="Node2D" parent="Tiles/Player1"]
+position = Vector2(300, 980)
+scale = Vector2(0.5, 0.5)
+
 [node name="Player2" type="Node2D" parent="Tiles"]
 script = ExtResource("6_k4jhx")
 player_number = 2
@@ -92,6 +97,11 @@ position = Vector2(1350, 206)
 rotation = 3.14159
 scale = Vector2(0.6, 0.6)
 script = ExtResource("4_58fn3")
+
+[node name="ExposedTiles" type="Node2D" parent="Tiles/Player2"]
+position = Vector2(1350, 100)
+rotation = 3.14159
+scale = Vector2(0.6, 0.6)
 
 [node name="Player3" type="Node2D" parent="Tiles"]
 script = ExtResource("6_k4jhx")
@@ -103,6 +113,11 @@ rotation = 1.5708
 scale = Vector2(0.6, 0.6)
 script = ExtResource("4_58fn3")
 
+[node name="ExposedTiles" type="Node2D" parent="Tiles/Player3"]
+position = Vector2(1810, 161)
+rotation = 1.5708
+scale = Vector2(0.6, 0.6)
+
 [node name="Player4" type="Node2D" parent="Tiles"]
 script = ExtResource("6_k4jhx")
 player_number = 4
@@ -113,24 +128,254 @@ rotation = -1.5708
 scale = Vector2(0.6, 0.6)
 script = ExtResource("4_58fn3")
 
+[node name="ExposedTiles" type="Node2D" parent="Tiles/Player4"]
+position = Vector2(110, 881)
+rotation = -1.5708
+scale = Vector2(0.6, 0.6)
+
 [node name="Discard" type="Node2D" parent="Tiles"]
-position = Vector2(960, 540)
+position = Vector2(806, 340)
 scale = Vector2(0.2, 0.2)
 script = ExtResource("4_kud7w")
 
 [node name="Line1" type="Node2D" parent="Tiles/Discard"]
 
+[node name="Tile" parent="Tiles/Discard/Line1" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile2" parent="Tiles/Discard/Line1" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile3" parent="Tiles/Discard/Line1" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile4" parent="Tiles/Discard/Line1" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile5" parent="Tiles/Discard/Line1" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile6" parent="Tiles/Discard/Line1" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile7" parent="Tiles/Discard/Line1" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile8" parent="Tiles/Discard/Line1" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile9" parent="Tiles/Discard/Line1" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile10" parent="Tiles/Discard/Line1" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile11" parent="Tiles/Discard/Line1" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile12" parent="Tiles/Discard/Line1" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile13" parent="Tiles/Discard/Line1" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile14" parent="Tiles/Discard/Line1" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile15" parent="Tiles/Discard/Line1" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
 [node name="Line2" type="Node2D" parent="Tiles/Discard"]
 position = Vector2(0, 140)
+
+[node name="Tile" parent="Tiles/Discard/Line2" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile2" parent="Tiles/Discard/Line2" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile3" parent="Tiles/Discard/Line2" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile4" parent="Tiles/Discard/Line2" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile5" parent="Tiles/Discard/Line2" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile6" parent="Tiles/Discard/Line2" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile7" parent="Tiles/Discard/Line2" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile8" parent="Tiles/Discard/Line2" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile9" parent="Tiles/Discard/Line2" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile10" parent="Tiles/Discard/Line2" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile11" parent="Tiles/Discard/Line2" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile12" parent="Tiles/Discard/Line2" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile13" parent="Tiles/Discard/Line2" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile14" parent="Tiles/Discard/Line2" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile15" parent="Tiles/Discard/Line2" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
 
 [node name="Line3" type="Node2D" parent="Tiles/Discard"]
 position = Vector2(0, 280)
 
+[node name="Tile" parent="Tiles/Discard/Line3" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile2" parent="Tiles/Discard/Line3" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile3" parent="Tiles/Discard/Line3" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile4" parent="Tiles/Discard/Line3" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile5" parent="Tiles/Discard/Line3" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile6" parent="Tiles/Discard/Line3" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile7" parent="Tiles/Discard/Line3" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile8" parent="Tiles/Discard/Line3" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile9" parent="Tiles/Discard/Line3" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile10" parent="Tiles/Discard/Line3" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile11" parent="Tiles/Discard/Line3" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile12" parent="Tiles/Discard/Line3" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile13" parent="Tiles/Discard/Line3" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile14" parent="Tiles/Discard/Line3" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile15" parent="Tiles/Discard/Line3" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
 [node name="Line4" type="Node2D" parent="Tiles/Discard"]
 position = Vector2(0, 420)
 
+[node name="Tile" parent="Tiles/Discard/Line4" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile2" parent="Tiles/Discard/Line4" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile3" parent="Tiles/Discard/Line4" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile4" parent="Tiles/Discard/Line4" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile5" parent="Tiles/Discard/Line4" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile6" parent="Tiles/Discard/Line4" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile7" parent="Tiles/Discard/Line4" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile8" parent="Tiles/Discard/Line4" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile9" parent="Tiles/Discard/Line4" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile10" parent="Tiles/Discard/Line4" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile11" parent="Tiles/Discard/Line4" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile12" parent="Tiles/Discard/Line4" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile13" parent="Tiles/Discard/Line4" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile14" parent="Tiles/Discard/Line4" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile15" parent="Tiles/Discard/Line4" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
 [node name="Line5" type="Node2D" parent="Tiles/Discard"]
 position = Vector2(0, 560)
+
+[node name="Tile" parent="Tiles/Discard/Line5" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile2" parent="Tiles/Discard/Line5" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile3" parent="Tiles/Discard/Line5" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile4" parent="Tiles/Discard/Line5" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile5" parent="Tiles/Discard/Line5" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile6" parent="Tiles/Discard/Line5" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile7" parent="Tiles/Discard/Line5" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile8" parent="Tiles/Discard/Line5" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile9" parent="Tiles/Discard/Line5" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile10" parent="Tiles/Discard/Line5" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile11" parent="Tiles/Discard/Line5" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile12" parent="Tiles/Discard/Line5" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile13" parent="Tiles/Discard/Line5" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile14" parent="Tiles/Discard/Line5" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
+
+[node name="Tile15" parent="Tiles/Discard/Line5" instance=ExtResource("9_iotsf")]
+position = Vector2(8394.82, 888.224)
 
 [node name="Table" type="Node2D" parent="Tiles"]
 script = ExtResource("8_x2g4q")
