@@ -77,33 +77,42 @@ player_number = "player4"
 
 [node name="Player2" type="Node2D" parent="Tiles"]
 script = ExtResource("6_k4jhx")
-player_number = 2
 
 [node name="Hand" type="Node2D" parent="Tiles/Player2"]
 position = Vector2(1350, 206)
 rotation = 3.14159
 scale = Vector2(0.6, 0.6)
 script = ExtResource("4_58fn3")
+space_between_tiles = null
+tiles_on_hand_draggable = null
+initial_tile_per_hand = null
+max_tile_per_hand = null
 
 [node name="Player3" type="Node2D" parent="Tiles"]
 script = ExtResource("6_k4jhx")
-player_number = 3
 
 [node name="Hand" type="Node2D" parent="Tiles/Player3"]
 position = Vector2(1710, 120)
 rotation = 1.5708
 scale = Vector2(0.6, 0.6)
 script = ExtResource("4_58fn3")
+space_between_tiles = null
+tiles_on_hand_draggable = null
+initial_tile_per_hand = null
+max_tile_per_hand = null
 
 [node name="Player4" type="Node2D" parent="Tiles"]
 script = ExtResource("6_k4jhx")
-player_number = 4
 
 [node name="Hand" type="Node2D" parent="Tiles/Player4"]
 position = Vector2(210, 900)
 rotation = -1.5708
 scale = Vector2(0.6, 0.6)
 script = ExtResource("4_58fn3")
+space_between_tiles = null
+tiles_on_hand_draggable = null
+initial_tile_per_hand = null
+max_tile_per_hand = null
 
 [node name="Discard" type="Node2D" parent="Tiles"]
 position = Vector2(460, 362)
@@ -181,7 +190,10 @@ script = ExtResource("3_fx0ap")
 [node name="Hand" type="Node2D" parent="Tiles/Player1"]
 position = Vector2(310, 846)
 script = ExtResource("4_58fn3")
+space_between_tiles = null
 tiles_on_hand_draggable = true
+initial_tile_per_hand = null
+max_tile_per_hand = null
 
 [node name="Dice" type="Node2D" parent="."]
 position = Vector2(1700, 40)

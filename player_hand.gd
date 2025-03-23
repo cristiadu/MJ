@@ -8,6 +8,8 @@ signal should_reorder_tiles
 @export var initial_tile_per_hand = 13
 @export var max_tile_per_hand = 14
 
+@onready var player = get_parent()
+
 func _ready():
 	self.should_reorder_tiles.connect(reorder_tiles)
 	
@@ -19,11 +21,18 @@ func add_tile_to_hand(tile, is_face_down = true):
 		print("Cannot add another tile to player hand, reached max number!")
 		return false
 	
+	# Set basic properties
 	tile.draggable = tiles_on_hand_draggable
-	tile.position.x = total_tiles_in_hand * space_between_tiles
 	tile.order = total_tiles_in_hand
-	tile.is_face_down = is_face_down
+	tile.change_face_down_or_up(is_face_down)
+	
+	# Add the tile to the hand
 	add_child(tile)
+	
+	# Reset position and rotation relative to the hand
+	tile.position = Vector2(total_tiles_in_hand * space_between_tiles, 0)
+	tile.rotation = 0
+	
 	return true
 
 

@@ -80,14 +80,18 @@ func draw_initial_tiles():
 			break
 			
 		for player_number in range(1, 5):
-			if players_hand[player_number - 1].get_total_tiles_in_hand() == players_hand[player_number - 1].initial_tile_per_hand:
-				print("Player "+str(player_number) + " is ready!")
+			var current_tiles = players_hand[player_number - 1].get_total_tiles_in_hand()
+			var max_tiles = players_hand[player_number - 1].initial_tile_per_hand
+			
+			if current_tiles == max_tiles:
+				print("Player "+str(player_number) + " is ready! (" + str(current_tiles) + "/" + str(max_tiles) + ")")
 				players_with_max_tiles += 1
 			else:
-				var tiles_needed = players_hand[player_number - 1].initial_tile_per_hand - players_hand[player_number - 1].get_total_tiles_in_hand()
+				var tiles_needed = max_tiles - current_tiles
 				var draw_amount = min(4, tiles_needed)  # Draw at most 4 tiles at a time, but don't exceed needed amount
+				
 				if draw_amount > 0:
-					print("Player "+str(player_number) + " is drawing "+str(draw_amount)+" tiles!")
+					print("Player "+str(player_number) + " is drawing "+str(draw_amount)+" tiles! (" + str(current_tiles) + "/" + str(max_tiles) + ")")
 					var success = draw_tiles(player_number, draw_amount)
 					
 					if not success:
@@ -98,71 +102,94 @@ func draw_initial_tiles():
 							break
 					else:
 						consecutive_failed_draws = 0
+						
+						# Recheck if player now has max tiles after drawing
+						current_tiles = players_hand[player_number - 1].get_total_tiles_in_hand()
+						if current_tiles == max_tiles:
+							print("Player "+str(player_number) + " is now ready! (" + str(current_tiles) + "/" + str(max_tiles) + ")")
+							players_with_max_tiles += 1
 		
 		# Break the loop if all players have their tiles
 		if players_with_max_tiles == 4:
+			print("All players have their initial tiles, setup complete")
 			break
 
 
 func draw_tiles(player_number, number_of_tiles = 1):
+	# If no tiles needed, return success immediately
+	if number_of_tiles <= 0:
+		return true
+		
 	var pile_wind = get_node(self.current_draw_wind)
 	var player_hand = get_parent().get_node("Player" + str(player_number) + "/Hand")
 	print("Draw"+str(number_of_tiles)+"::Player"+str(player_number))
-
-	var number_of_tiles_to_draw = number_of_tiles
 	
-	# Get the count of available tiles in the current wind
-	var available_tiles_top = pile_wind.get_available_tiles_count("TopPile")
-	var available_tiles_bottom = pile_wind.get_available_tiles_count("BottomPile")
-	var total_tiles = available_tiles_top + available_tiles_bottom
+	# Check if we need to change winds due to position
+	if pile_wind.current_pile_draw_position > pile_wind.max_tile_per_line:
+		print("Current position " + str(pile_wind.current_pile_draw_position) + " exceeds max of " + str(pile_wind.max_tile_per_line) + " in " + self.current_draw_wind)
+		self.current_draw_wind = get_next_wind(self.current_draw_wind)
+		pile_wind = get_node(self.current_draw_wind)
+		pile_wind.current_pile_draw_position = 1
+		print("Moved to next wind: " + self.current_draw_wind + " at position 1")
 	
-	# If no tiles in current wind, try to find another wind with tiles
-	if total_tiles == 0:
-		var original_wind = self.current_draw_wind
-		var found_tiles = false
+	# Check if this wind has any available tiles
+	if not pile_wind.has_available_tiles():
+		print("No available tiles in " + self.current_draw_wind + ", trying next wind")
 		
-		# Try each wind until we find one with tiles or we've checked all of them
-		while not found_tiles:
-			var old_wind = self.current_draw_wind
+		# Try all winds in sequence until we find one with tiles
+		var original_wind = self.current_draw_wind
+		var tried_all_winds = false
+		
+		while not pile_wind.has_available_tiles() and not tried_all_winds:
 			self.current_draw_wind = get_next_wind(self.current_draw_wind)
+			pile_wind = get_node(self.current_draw_wind)
 			
-			# If we've gone full circle, no tiles are available
+			# Check if we've gone full circle
 			if self.current_draw_wind == original_wind:
-				print("No tiles available in any wind")
+				tried_all_winds = true
+				print("Checked all winds, no available tiles found")
 				return false
 				
-			# Check if this wind has tiles
-			pile_wind = get_node(self.current_draw_wind)
-			total_tiles = pile_wind.get_total_available_tiles()
+			if pile_wind.has_available_tiles():
+				print("Found available tiles in " + self.current_draw_wind)
+				# Find first valid position
+				var next_position = pile_wind.find_next_available_position(1)
+				if next_position != -1:
+					pile_wind.current_pile_draw_position = next_position
+					print("Setting position to " + str(pile_wind.current_pile_draw_position) + " in " + self.current_draw_wind)
+	
+	# At this point, we have a wind with tiles and a valid position
+	print("Drawing from " + self.current_draw_wind + " at position " + str(pile_wind.current_pile_draw_position))
+	
+	# Draw tiles from the current wind
+	var tiles_drawn = pile_wind.draw_tiles_to_player_hand(player_hand, number_of_tiles)
+	
+	# Check if we successfully drew some tiles
+	if tiles_drawn > 0:
+		var remaining_tiles_to_draw = number_of_tiles - tiles_drawn
+		print("Drew " + str(tiles_drawn) + " tiles, " + str(remaining_tiles_to_draw) + " remaining to draw")
+		
+		# If we've drawn all the tiles we need, return success
+		if remaining_tiles_to_draw <= 0:
+			return true
 			
-			if total_tiles > 0:
-				found_tiles = true
-				print("Found " + str(total_tiles) + " tiles in " + self.current_draw_wind)
-	
-	if total_tiles < number_of_tiles:
-		number_of_tiles_to_draw = total_tiles
-		if total_tiles > 0:
-			print("Drawing remaining " + str(number_of_tiles_to_draw) + " tiles from " + self.current_draw_wind)
-	
-	# Only try to draw tiles if there are tiles to draw
-	var added_tiles = false
-	if number_of_tiles_to_draw > 0:
-		added_tiles = pile_wind.draw_tiles_to_player_hand(player_hand, number_of_tiles_to_draw)
-		
-		# If no tiles were successfully drawn but we expected some, try the next wind
-		if not added_tiles and number_of_tiles_to_draw > 0:
-			print("Failed to draw tiles from " + self.current_draw_wind + ", trying next wind")
+		# If we need more tiles, check position
+		if pile_wind.current_pile_draw_position > pile_wind.max_tile_per_line:
+			print("Reached end of " + self.current_draw_wind + ", but still need " + str(remaining_tiles_to_draw) + " more tiles")
 			self.current_draw_wind = get_next_wind(self.current_draw_wind)
-			return draw_tiles(player_number, number_of_tiles)
-	else:
-		print("No tiles to draw from " + self.current_draw_wind)
-		return false
-
-	var remaining_tiles_to_draw = number_of_tiles - number_of_tiles_to_draw
-	if remaining_tiles_to_draw > 0 and added_tiles:
-		return draw_tiles(player_number, remaining_tiles_to_draw)
+			pile_wind = get_node(self.current_draw_wind)
+			pile_wind.current_pile_draw_position = 1
+			print("Moving to next wind: " + self.current_draw_wind + " at position 1")
+		else:
+			print("Continuing to draw from " + self.current_draw_wind + " at position " + str(pile_wind.current_pile_draw_position))
 		
-	return added_tiles
+		# Recursively try to draw the remaining tiles
+		return draw_tiles(player_number, remaining_tiles_to_draw)
+	else:
+		# Failed to draw any tiles, try the next wind
+		print("Failed to draw from " + self.current_draw_wind + ", trying next wind")
+		self.current_draw_wind = get_next_wind(self.current_draw_wind)
+		return draw_tiles(player_number, number_of_tiles)
 
 
 func draw_table_tiles(game_tiles):

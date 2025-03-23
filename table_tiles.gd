@@ -11,6 +11,10 @@ var top_pile_tiles = []
 var bottom_pile_tiles = []
 var current_pile_draw_position = 1
 
+# Track available tile positions
+var first_available_index = 1
+var last_available_index = 0
+
 func _ready():
 	self.current_drawn_pile = $TopPile
 	self.drew_tile.connect(on_draw_tile)
@@ -18,6 +22,10 @@ func _ready():
 	top_pile_tiles.fill({"tile": null, "was_drawn": false})
 	bottom_pile_tiles.resize(max_tile_per_line)
 	bottom_pile_tiles.fill({"tile": null, "was_drawn": false})
+	
+	# Initialize indices
+	first_available_index = max_tile_per_line + 1
+	last_available_index = 0
 
 
 func add_tile_to_players_table(tile):
@@ -32,10 +40,17 @@ func add_tile_to_players_table(tile):
 	var current_line = $BottomPile if total_tile_in_bottom_line < max_tile_per_line else $TopPile
 	
 	# Add to tiles array so we can draw them later.
+	var position = 0
 	if current_line == $BottomPile:
-		bottom_pile_tiles.insert(total_tile_in_bottom_line, {"tile": tile, "was_drawn": false})
+		position = total_tile_in_bottom_line + 1  # 1-indexed position
+		bottom_pile_tiles[position - 1] = {"tile": tile, "was_drawn": false}
 	else:
-		top_pile_tiles.insert(total_tile_in_top_line, {"tile": tile, "was_drawn": false})
+		position = total_tile_in_top_line + 1  # 1-indexed position
+		top_pile_tiles[position - 1] = {"tile": tile, "was_drawn": false}
+	
+	# Update available indices - positions are 1-indexed
+	first_available_index = min(first_available_index, position)
+	last_available_index = max(last_available_index, position)
 
 	tile.position.x = current_line_total * space_between_tiles
 	tile.is_face_down = true # All tiles here are face down
@@ -50,17 +65,22 @@ func on_draw_tile(tile, tile_end_position):
 func draw_tiles_to_player_hand(player_hand, number_of_tiles):
 	var drawn_tiles = draw_tiles_from_current_draw_index(number_of_tiles)
 	
-	# If no tiles were drawn, return false immediately
+	# If no tiles were drawn, return 0 immediately
 	if drawn_tiles.size() == 0:
 		print("No tiles were drawn from " + self.name)
-		return false
+		return 0
 		
+	var tiles_added = 0
 	for tile in drawn_tiles:
-		self.drew_tile.emit(tile, player_hand.position + player_hand.position_of_next_tile())
-		var added_tile = player_hand.add_tile_to_hand(tile, tile.is_face_down)
-		if not added_tile:
-			return false
-	return true
+		var next_pos = player_hand.position_of_next_tile()
+		self.drew_tile.emit(tile, next_pos)
+		var added_tile = player_hand.add_tile_to_hand(tile, player_hand.player.player_number != 1)
+		if added_tile:
+			tiles_added += 1
+		else:
+			break
+	
+	return tiles_added
 
 
 func get_available_tiles_count(pile_name):
@@ -78,60 +98,132 @@ func get_total_available_tiles():
 	return get_available_tiles_count("TopPile") + get_available_tiles_count("BottomPile")
 
 
+# Check if there's an available tile at a specific position (in either pile)
+func has_available_tile_at_position(position):
+	if position < 1 or position > max_tile_per_line:
+		return false
+		
+	# Check top pile first, then bottom pile
+	if position - 1 < top_pile_tiles.size():
+		var top_tile = top_pile_tiles[position - 1]
+		if top_tile.tile != null and not top_tile.was_drawn:
+			return true
+			
+	if position - 1 < bottom_pile_tiles.size():
+		var bottom_tile = bottom_pile_tiles[position - 1]
+		if bottom_tile.tile != null and not bottom_tile.was_drawn:
+			return true
+			
+	return false
+
+
+# Check if this wind has any available tiles at all
+func has_available_tiles():
+	return first_available_index <= last_available_index && last_available_index > 0
+
+
+# Find the next available position to draw from
+func find_next_available_position(start_position = 1):
+	for pos in range(start_position, max_tile_per_line + 1):
+		if has_available_tile_at_position(pos):
+			return pos
+	return -1  # No available positions
+
+
+# Update available indices after drawing a tile
+func update_available_indices():
+	# Update first available index
+	var found_first = false
+	for pos in range(first_available_index, max_tile_per_line + 1):
+		if has_available_tile_at_position(pos):
+			first_available_index = pos
+			found_first = true
+			break
+	
+	if not found_first:
+		first_available_index = max_tile_per_line + 1
+		
+	# Update last available index
+	var found_last = false
+	for pos in range(last_available_index, 0, -1):
+		if has_available_tile_at_position(pos):
+			last_available_index = pos
+			found_last = true
+			break
+	
+	if not found_last:
+		last_available_index = 0
+
+
 func draw_tiles_from_current_draw_index(number_of_tiles):
 	var drawn_tiles = []
 	var tile_metadata = null
-	var number_of_tiles_to_draw = number_of_tiles
+	var tiles_to_draw = number_of_tiles
 	
-	while number_of_tiles_to_draw > 0:
-		# Check if the current pile has any tiles left
-		var top_has_tiles = get_available_tiles_count("TopPile") > 0
-		var bottom_has_tiles = get_available_tiles_count("BottomPile") > 0
-		
-		# If current pile is empty but the other one has tiles, switch to it
-		if (self.current_drawn_pile == $TopPile and not top_has_tiles and bottom_has_tiles):
-			self.current_drawn_pile = $BottomPile
-		elif (self.current_drawn_pile == $BottomPile and not bottom_has_tiles and top_has_tiles):
-			self.current_drawn_pile = $TopPile
-		
-		# Try to get a valid tile from the current position
-		var found_valid_tile = false
-		var start_position = self.current_pile_draw_position
-		var max_position = max_tile_per_line
-		
-		for pos in range(start_position, max_position + 1):
-			self.current_pile_draw_position = pos
-			
-			if self.current_drawn_pile == $TopPile:
-				tile_metadata = top_pile_tiles[self.current_pile_draw_position - 1]
-			elif self.current_drawn_pile == $BottomPile:
-				tile_metadata = bottom_pile_tiles[self.current_pile_draw_position - 1]
-				
-			if tile_metadata != null and tile_metadata.tile != null and not tile_metadata.was_drawn:
-				found_valid_tile = true
-				break
-				
-		# If we didn't find a valid tile in this pile, we're done
-		if not found_valid_tile:
-			print("No more valid tiles found in " + self.name + " " + self.current_drawn_pile.name)
+	while tiles_to_draw > 0:
+		# Check if there are any available tiles
+		if not has_available_tiles():
+			print("No more available tiles in " + self.name)
 			return drawn_tiles
-			
-		drawn_tiles.append(tile_metadata.tile)
-		print("Got tile from position: " + str(self.current_pile_draw_position) + ", Pile="+self.current_drawn_pile.name + ", Wind=" + self.name)
-		tile_metadata.was_drawn = true
-		number_of_tiles_to_draw -= 1
-		self.current_drawn_pile.remove_child(tile_metadata.tile)
 		
-		# Switch piles after drawing a tile
-		self.current_drawn_pile = $TopPile if current_drawn_pile == $BottomPile else $BottomPile
-		
-		# Increment position when switching back to top pile
-		if self.current_drawn_pile == $TopPile:
-			self.current_pile_draw_position += 1
-			print("Increasing position to: " + str(self.current_pile_draw_position))
-			
-			# If we've reached the end of both piles, we're done
-			if self.current_pile_draw_position > max_tile_per_line:
+		# If current position is invalid, find the next available position
+		if current_pile_draw_position > max_tile_per_line or not has_available_tile_at_position(current_pile_draw_position):
+			var next_position = find_next_available_position(1)  # Start searching from position 1
+			if next_position == -1:
+				print("No more valid positions in " + self.name)
 				return drawn_tiles
+			
+			current_pile_draw_position = next_position
+			print("Adjusted to next available position: " + str(current_pile_draw_position))
+		
+		# Try to draw from top pile first
+		var drew_tile = false
+		
+		# Try top pile
+		if current_pile_draw_position - 1 < top_pile_tiles.size():
+			var top_tile = top_pile_tiles[current_pile_draw_position - 1]
+			if top_tile.tile != null and not top_tile.was_drawn:
+				drawn_tiles.append(top_tile.tile)
+				print("Got tile from position: " + str(current_pile_draw_position) + ", Pile=TopPile, Wind=" + self.name)
+				top_tile.was_drawn = true
+				$TopPile.remove_child(top_tile.tile)
+				tiles_to_draw -= 1
+				drew_tile = true
+				
+				# After drawing from top pile, don't increment position yet
+				# We'll try bottom pile at the same position
+			
+		# If couldn't draw from top pile or already drew from top pile, try bottom pile
+		if not drew_tile and current_pile_draw_position - 1 < bottom_pile_tiles.size():
+			var bottom_tile = bottom_pile_tiles[current_pile_draw_position - 1]
+			if bottom_tile.tile != null and not bottom_tile.was_drawn:
+				drawn_tiles.append(bottom_tile.tile)
+				print("Got tile from position: " + str(current_pile_draw_position) + ", Pile=BottomPile, Wind=" + self.name)
+				bottom_tile.was_drawn = true
+				$BottomPile.remove_child(bottom_tile.tile)
+				tiles_to_draw -= 1
+				drew_tile = true
+				
+				# After drawing from bottom pile, increment position for next draw
+				current_pile_draw_position += 1
+				print("Increasing position to: " + str(current_pile_draw_position))
+				
+				# Check if we've reached the end of positions
+				if current_pile_draw_position > max_tile_per_line:
+					print("Reached maximum position " + str(max_tile_per_line))
+					break
+			
+		# If we couldn't draw from either pile at this position, move to next position
+		if not drew_tile:
+			current_pile_draw_position += 1
+			print("No tiles at position " + str(current_pile_draw_position - 1) + ", moving to next position")
+			
+			# Check if we've reached the end of positions
+			if current_pile_draw_position > max_tile_per_line:
+				print("Reached maximum position " + str(max_tile_per_line))
+				break
+		
+		# Update available indices after each tile drawn
+		update_available_indices()
 	
 	return drawn_tiles

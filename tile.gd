@@ -5,7 +5,10 @@ extends Area2D
 @export var draggable = false
 @export var order = 1
 
-@onready var hand = get_parent()
+var hand:
+	get:
+		return get_parent()
+
 @onready var collision_shape_size = get_collision_shape_size()
 @onready var viewport = get_viewport_rect()
 
