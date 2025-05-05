@@ -1,21 +1,26 @@
 class_name PlayerHand
 extends Node2D
 
+# Signals
 signal should_reorder_tiles
+signal tile_added(tile)
+signal tile_removed(tile)
 
+# Configuration
 @export var space_between_tiles = 100
 @export var tiles_on_hand_draggable = false
 @export var initial_tile_per_hand = 13
 @export var max_tile_per_hand = 14
 
+# References
 @onready var player = get_parent()
 @onready var exposed_tiles = get_parent().get_node("ExposedTiles")
 @export var space_between_exposed_tiles = 100
 
 func _ready():
 	self.should_reorder_tiles.connect(reorder_tiles)
-	
 
+# Add a tile to the player's hand
 func add_tile_to_hand(tile, is_face_down = true):
 	var total_tiles_in_hand = self.get_total_tiles_in_hand()
 	
@@ -28,6 +33,7 @@ func add_tile_to_hand(tile, is_face_down = true):
 		table.draw_tiles(player.player_number, 1)
 		return true
 	
+	# Check if we've reached the maximum hand size
 	if total_tiles_in_hand >= max_tile_per_hand:
 		print("Cannot add another tile to player hand, reached max number!")
 		return false
@@ -44,9 +50,12 @@ func add_tile_to_hand(tile, is_face_down = true):
 	tile.position = Vector2(total_tiles_in_hand * space_between_tiles, 0)
 	tile.rotation = 0
 	
+	# Emit signal for any listeners
+	tile_added.emit(tile)
+	
 	return true
 
-
+# Add a tile to the exposed area (for flowers)
 func add_tile_to_exposed_area(tile):
 	# Flower tiles should always be face up
 	tile.change_face_down_or_up(false)
@@ -77,15 +86,23 @@ func add_tile_to_exposed_area(tile):
 	
 	return true
 
-
+# Get the total number of tiles in the player's hand
 func get_total_tiles_in_hand():
 	return get_child_count()
 
-
+# Calculate the position for the next tile to be added
 func position_of_next_tile():
 	return Vector2(get_total_tiles_in_hand() * space_between_tiles, 0)
 
-
+# Reorder tiles after a drag operation
 func reorder_tiles():
 	for tile in get_children():
 		create_tween().tween_property(tile, "position", Vector2(tile.order * space_between_tiles, 0), 0.2)
+
+# Remove a tile from the hand
+func remove_tile(tile):
+	if has_node(tile.get_path()):
+		remove_child(tile)
+		tile_removed.emit(tile)
+		return true
+	return false

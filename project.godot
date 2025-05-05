@@ -15,6 +15,12 @@ run/main_scene="res://game.tscn"
 config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameState="*res://game_state.gd"
+TileData="*res://tile_data.gd"
+NotificationHandler="*res://notification_handler.gd"
+
 [display]
 
 window/size/viewport_width=1920
