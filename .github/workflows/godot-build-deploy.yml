@@ -1,0 +1,176 @@
+name: Build and Deploy to itch.io
+
+on:
+  push:
+    branches:
+      - main  # Adjust this if your main branch has a different name
+    tags:
+      - 'v*'  # Run when pushing version tags
+  workflow_dispatch:  # Allow manual triggering
+
+env:
+  GODOT_VERSION: 4.4  # Use the version your project requires
+  EXPORT_NAME: MJ
+  ITCH_USERNAME: ${{ vars.ITCH_USERNAME }}
+  ITCH_GAME_NAME: ${{ vars.ITCH_GAME_NAME }}  # Your itch.io game name/URL path
+
+jobs:
+  export-web:
+    name: Web Export
+    runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci:4.4
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          lfs: true
+
+      - name: Setup
+        run: |
+          mkdir -p ~/.local/share/godot/export_templates
+          mkdir -p ~/.config/godot/
+          mkdir -p ./build/web
+          
+      - name: Web Build
+        run: |
+          godot -v --headless --export-release "Web" ./build/web/index.html
+          
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: web
+          path: build/web
+          
+      - name: Deploy to itch.io
+        uses: KikimoraGames/itch-publish@v0.0.3
+        with:
+          butlerApiKey: ${{ secrets.BUTLER_API_KEY }}
+          gameData: ./build/web
+          itchUsername: ${{ env.ITCH_USERNAME }}
+          itchGameId: ${{ env.ITCH_GAME_NAME }}
+          buildChannel: html5
+          buildNumber: ${{ github.run_number }}
+
+  export-windows:
+    name: Windows Export
+    runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci:4.4
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          lfs: true
+
+      - name: Setup
+        run: |
+          mkdir -p ~/.local/share/godot/export_templates
+          mkdir -p ~/.config/godot/
+          mkdir -p ./build/windows
+          
+      - name: Windows Build
+        run: |
+          godot -v --headless --export-release "Windows Desktop" ./build/windows/$EXPORT_NAME.exe
+          
+      - name: Zip Build
+        run: |
+          cd ./build/windows
+          zip -r ../../$EXPORT_NAME-windows.zip .
+          cd ../..
+          
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: windows
+          path: ${{ env.EXPORT_NAME }}-windows.zip
+          
+      - name: Deploy to itch.io
+        uses: KikimoraGames/itch-publish@v0.0.3
+        with:
+          butlerApiKey: ${{ secrets.BUTLER_API_KEY }}
+          gameData: ${{ env.EXPORT_NAME }}-windows.zip
+          itchUsername: ${{ env.ITCH_USERNAME }}
+          itchGameId: ${{ env.ITCH_GAME_NAME }}
+          buildChannel: windows
+          buildNumber: ${{ github.run_number }}
+
+  export-mac:
+    name: macOS Export
+    runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci:4.4
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          lfs: true
+
+      - name: Setup
+        run: |
+          mkdir -p ~/.local/share/godot/export_templates
+          mkdir -p ~/.config/godot/
+          mkdir -p ./build/mac
+          
+      - name: Mac Build
+        run: |
+          godot -v --headless --export-release "macOS" ./build/mac/$EXPORT_NAME.zip
+          
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: mac
+          path: build/mac
+          
+      - name: Deploy to itch.io
+        uses: KikimoraGames/itch-publish@v0.0.3
+        with:
+          butlerApiKey: ${{ secrets.BUTLER_API_KEY }}
+          gameData: ./build/mac/${{ env.EXPORT_NAME }}.zip
+          itchUsername: ${{ env.ITCH_USERNAME }}
+          itchGameId: ${{ env.ITCH_GAME_NAME }}
+          buildChannel: mac
+          buildNumber: ${{ github.run_number }}
+
+  export-linux:
+    name: Linux Export
+    runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci:4.4
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          lfs: true
+
+      - name: Setup
+        run: |
+          mkdir -p ~/.local/share/godot/export_templates
+          mkdir -p ~/.config/godot/
+          mkdir -p ./build/linux
+          
+      - name: Linux Build
+        run: |
+          godot -v --headless --export-release "Linux/X11" ./build/linux/$EXPORT_NAME.x86_64
+          
+      - name: Create Archive
+        run: |
+          cd ./build/linux
+          zip -r ../../$EXPORT_NAME-linux.zip .
+          cd ../..
+          
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: linux
+          path: ${{ env.EXPORT_NAME }}-linux.zip
+          
+      - name: Deploy to itch.io
+        uses: KikimoraGames/itch-publish@v0.0.3
+        with:
+          butlerApiKey: ${{ secrets.BUTLER_API_KEY }}
+          gameData: ${{ env.EXPORT_NAME }}-linux.zip
+          itchUsername: ${{ env.ITCH_USERNAME }}
+          itchGameId: ${{ env.ITCH_GAME_NAME }}
+          buildChannel: linux
+          buildNumber: ${{ github.run_number }} 
