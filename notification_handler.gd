@@ -7,6 +7,7 @@ extends Node
 var notification_panel
 var notification_label
 var notification_timer
+var canvas_layer
 var is_panel_ready = false
 
 func _ready():
@@ -18,34 +19,48 @@ func _ready():
 		GameState.game_instance = self
 		
 func create_notification_panel():
+	# Create canvas layer to ensure UI is always on top
+	canvas_layer = CanvasLayer.new()
+	canvas_layer.layer = 10  # Higher layer to be on top
+	add_child(canvas_layer)
+	
 	# Create panel
 	notification_panel = Panel.new()
 	notification_panel.visible = false
-	notification_panel.anchors_preset = 5  # Top-center
+	
+	# Use Control's built-in anchors to center in screen
 	notification_panel.anchor_left = 0.5
+	notification_panel.anchor_top = 0.1  # Position at 10% from top
 	notification_panel.anchor_right = 0.5
-	notification_panel.offset_left = -200
-	notification_panel.offset_top = 50
-	notification_panel.offset_right = 200
-	notification_panel.offset_bottom = 150
+	notification_panel.anchor_bottom = 0.1
+	
+	# Use margin to define size and offset from anchor
+	notification_panel.offset_left = -200   # Half width to left
+	notification_panel.offset_right = 200   # Half width to right
+	notification_panel.offset_top = 0
+	notification_panel.offset_bottom = 100  # Height of panel
+	
+	# Add a colored background to make it stand out
+	notification_panel.self_modulate = Color(0.1, 0.1, 0.1, 0.8)  # Semi-transparent dark background
 	
 	# Create label
 	notification_label = Label.new()
-	notification_label.layout_mode = 1
-	notification_label.anchors_preset = 15  # Full rect
-	notification_label.anchor_right = 1.0
-	notification_label.anchor_bottom = 1.0
-	notification_label.grow_horizontal = 2
-	notification_label.grow_vertical = 2
+	notification_label.anchor_left = 0
+	notification_label.anchor_top = 0
+	notification_label.anchor_right = 1
+	notification_label.anchor_bottom = 1
+	notification_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	notification_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	
 	# Set font size correctly
 	var font_size = 24
 	notification_label.add_theme_font_size_override("font_size", font_size)
 	
-	notification_label.horizontal_alignment = 1  # Center
-	notification_label.vertical_alignment = 1  # Center
+	# Set text color to ensure visibility
+	notification_label.add_theme_color_override("font_color", Color(1, 1, 1, 1))
+	
 	notification_label.text = "Notification Text"
-	notification_label.autowrap_mode = 3  # Word wrap
+	notification_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	
 	# Create timer
 	notification_timer = Timer.new()
@@ -57,28 +72,14 @@ func create_notification_panel():
 	notification_panel.add_child(notification_label)
 	notification_panel.add_child(notification_timer)
 	
-	# Add to scene tree
-	add_to_scene_tree()
+	# Add the panel to our canvas layer
+	canvas_layer.add_child(notification_panel)
 	
 	# Mark as ready
 	is_panel_ready = true
 	
 	# Debug message
-	print("Notification panel initialized and added to scene tree")
-
-func add_to_scene_tree():
-	# Add panel to HUD if it exists, otherwise to this node
-	var game_node = get_node_or_null("/root/Game")
-	if game_node:
-		var hud = game_node.get_node_or_null("HUD")
-		if hud:
-			hud.add_child(notification_panel)
-			print("Added notification panel to HUD")
-			return
-	
-	# Fallback: add to this node
-	add_child(notification_panel)
-	print("Added notification panel to NotificationHandler node")
+	print("Notification panel initialized and added to canvas layer")
 
 # Show notification to the player
 func show_notification(message, duration = 2.0):

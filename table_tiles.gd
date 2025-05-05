@@ -40,17 +40,17 @@ func add_tile_to_players_table(tile):
 	var current_line = $BottomPile if total_tile_in_bottom_line < max_tile_per_line else $TopPile
 	
 	# Add to tiles array so we can draw them later.
-	var position = 0
+	var new_position = 0
 	if current_line == $BottomPile:
-		position = total_tile_in_bottom_line + 1  # 1-indexed position
-		bottom_pile_tiles[position - 1] = {"tile": tile, "was_drawn": false}
+		new_position = total_tile_in_bottom_line + 1  # 1-indexed position
+		bottom_pile_tiles[new_position - 1] = {"tile": tile, "was_drawn": false}
 	else:
-		position = total_tile_in_top_line + 1  # 1-indexed position
-		top_pile_tiles[position - 1] = {"tile": tile, "was_drawn": false}
+		new_position = total_tile_in_top_line + 1  # 1-indexed position
+		top_pile_tiles[new_position - 1] = {"tile": tile, "was_drawn": false}
 	
 	# Update available indices - positions are 1-indexed
-	first_available_index = min(first_available_index, position)
-	last_available_index = max(last_available_index, position)
+	first_available_index = min(first_available_index, new_position)
+	last_available_index = max(last_available_index, new_position)
 
 	tile.position.x = current_line_total * space_between_tiles
 	tile.is_face_down = true # All tiles here are face down
@@ -97,18 +97,18 @@ func get_total_available_tiles():
 
 
 # Check if there's an available tile at a specific position (in either pile)
-func has_available_tile_at_position(position):
-	if position < 1 or position > max_tile_per_line:
+func has_available_tile_at_position(position_to_check):
+	if position_to_check < 1 or position_to_check > max_tile_per_line:
 		return false
 		
 	# Check top pile first, then bottom pile
-	if position - 1 < top_pile_tiles.size():
-		var top_tile = top_pile_tiles[position - 1]
+	if position_to_check - 1 < top_pile_tiles.size():
+		var top_tile = top_pile_tiles[position_to_check - 1]
 		if top_tile.tile != null and not top_tile.was_drawn:
 			return true
 			
-	if position - 1 < bottom_pile_tiles.size():
-		var bottom_tile = bottom_pile_tiles[position - 1]
+	if position_to_check - 1 < bottom_pile_tiles.size():
+		var bottom_tile = bottom_pile_tiles[position_to_check - 1]
 		if bottom_tile.tile != null and not bottom_tile.was_drawn:
 			return true
 			
@@ -174,7 +174,7 @@ func draw_tiles_from_current_draw_index(number_of_tiles):
 			print("Adjusted to next available position: " + str(current_pile_draw_position))
 		
 		# Try to draw from top pile first
-		var drew_tile = false
+		var drew_tile_confirmed = false
 		
 		# Try top pile
 		if current_pile_draw_position - 1 < top_pile_tiles.size():
@@ -185,13 +185,13 @@ func draw_tiles_from_current_draw_index(number_of_tiles):
 				top_tile.was_drawn = true
 				$TopPile.remove_child(top_tile.tile)
 				tiles_to_draw -= 1
-				drew_tile = true
+				drew_tile_confirmed = true
 				
 				# After drawing from top pile, don't increment position yet
 				# We'll try bottom pile at the same position
 			
 		# If couldn't draw from top pile or already drew from top pile, try bottom pile
-		if not drew_tile and current_pile_draw_position - 1 < bottom_pile_tiles.size():
+		if not drew_tile_confirmed and current_pile_draw_position - 1 < bottom_pile_tiles.size():
 			var bottom_tile = bottom_pile_tiles[current_pile_draw_position - 1]
 			if bottom_tile.tile != null and not bottom_tile.was_drawn:
 				drawn_tiles.append(bottom_tile.tile)
@@ -199,7 +199,7 @@ func draw_tiles_from_current_draw_index(number_of_tiles):
 				bottom_tile.was_drawn = true
 				$BottomPile.remove_child(bottom_tile.tile)
 				tiles_to_draw -= 1
-				drew_tile = true
+				drew_tile_confirmed = true
 				
 				# After drawing from bottom pile, increment position for next draw
 				current_pile_draw_position += 1
@@ -211,7 +211,7 @@ func draw_tiles_from_current_draw_index(number_of_tiles):
 					break
 			
 		# If we couldn't draw from either pile at this position, move to next position
-		if not drew_tile:
+		if not drew_tile_confirmed:
 			current_pile_draw_position += 1
 			print("No tiles at position " + str(current_pile_draw_position - 1) + ", moving to next position")
 			
