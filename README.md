@@ -1,4 +1,6 @@
 # MJ
+<<<<<<< Updated upstream
+=======
 
 Mahjong game implementation in Godot 4.4.
 
@@ -8,19 +10,25 @@ This project uses GitHub Actions to automatically build and deploy to itch.io wh
 
 ### Setting up the itch.io Deployment
 
-To make the GitHub Actions workflow work with your itch.io account, you need to set up the following secrets in your GitHub repository:
+To make the GitHub Actions workflow work with your itch.io account, you need to set up the following in your GitHub repository:
 
 1. Go to your GitHub repository
 2. Click on "Settings" > "Secrets and variables" > "Actions"
-3. Add the following secrets:
+3. Add the following secret:
+   - `BUTLER_API_KEY`: Your itch.io API key (get it from https://itch.io/user/settings/api-keys)
 
-- `BUTLER_API_KEY`: Your itch.io API key (get it from https://itch.io/user/settings/api-keys)
-- `ITCH_USERNAME`: Your itch.io username
-- `ITCH_GAME_NAME`: The URL name of your game on itch.io
+4. Under the "Variables" tab, add:
+   - `ITCH_USERNAME`: Your itch.io username
+   - `ITCH_GAME_NAME`: The URL name of your game on itch.io
 
 For example, if your game URL is `https://username.itch.io/my-game`, then:
 - `ITCH_USERNAME` would be "username"
 - `ITCH_GAME_NAME` would be "my-game"
+
+The workflow will:
+- Build for Web, Windows, macOS, and Linux
+- Upload each build as an artifact to GitHub Actions
+- Publish each build to the appropriate channel on itch.io
 
 ### Manual Deployment
 
@@ -35,10 +43,11 @@ If you prefer to manually deploy your game:
 
 ### Requirements
 
-- Godot 4.4 or newer
+- Godot 4.4.2 or newer
 
 ### Getting Started
 
 1. Clone the repository
 2. Open the project in Godot
 3. Press F5 to run the game
+>>>>>>> Stashed changes
