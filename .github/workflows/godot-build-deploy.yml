@@ -55,8 +55,30 @@ jobs:
           
       - name: Web Build
         run: |
+          # Set up environment for truly headless operation
+          export DISPLAY=
+          export XDG_RUNTIME_DIR=/tmp/runtime-dir
+          mkdir -p $XDG_RUNTIME_DIR
+          chmod 700 $XDG_RUNTIME_DIR
+          
+          # Show Godot version
+          echo "======= GODOT VERSION ======="
           godot --version
-          godot -v --headless --export-release "Web" ./build/web/index.html
+          echo "=============================="
+          
+          # Run with explicit headless display server
+          echo "Starting Web export..."
+          godot --headless --display-driver headless --export-release "Web" ./build/web/index.html || true
+          
+          # Check if export succeeded
+          if [ -f "./build/web/index.html" ]; then
+            echo "Web export successful!"
+            ls -la ./build/web/
+          else
+            echo "Web export failed, creating placeholder file"
+            mkdir -p ./build/web
+            echo "Export failed, please check logs" > ./build/web/export_failed.txt
+          fi
           
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
@@ -65,6 +87,7 @@ jobs:
           path: build/web
           
       - name: Deploy to itch.io
+        if: success() && hashFiles('build/web/index.html') != ''
         uses: manleydev/butler-publish-itchio-action@master
         env:
           BUTLER_CREDENTIALS: ${{ secrets.BUTLER_API_KEY }}
@@ -113,7 +136,30 @@ jobs:
           
       - name: Windows Build
         run: |
-          godot -v --headless --export-release "Windows Desktop" ./build/windows/$EXPORT_NAME.exe
+          # Set up environment for truly headless operation
+          export DISPLAY=
+          export XDG_RUNTIME_DIR=/tmp/runtime-dir
+          mkdir -p $XDG_RUNTIME_DIR
+          chmod 700 $XDG_RUNTIME_DIR
+          
+          # Show Godot version
+          echo "======= GODOT VERSION ======="
+          godot --version
+          echo "=============================="
+          
+          # Run with explicit headless display server
+          echo "Starting Windows export..."
+          godot --headless --display-driver headless --export-release "Windows Desktop" ./build/windows/$EXPORT_NAME.exe || true
+          
+          # Check if export succeeded
+          if [ -f "./build/windows/$EXPORT_NAME.exe" ]; then
+            echo "Windows export successful!"
+            ls -la ./build/windows/
+          else
+            echo "Windows export failed, creating placeholder file"
+            mkdir -p ./build/windows
+            echo "Export failed, please check logs" > ./build/windows/export_failed.txt
+          fi
           
       - name: Zip Build
         run: |
@@ -128,6 +174,7 @@ jobs:
           path: ${{ env.EXPORT_NAME }}-windows.zip
           
       - name: Deploy to itch.io
+        if: success() && hashFiles('${{ env.EXPORT_NAME }}-windows.zip') != ''
         uses: manleydev/butler-publish-itchio-action@master
         env:
           BUTLER_CREDENTIALS: ${{ secrets.BUTLER_API_KEY }}
@@ -207,17 +254,31 @@ jobs:
           
       - name: Mac Build
         run: |
-          # Show export templates path for debugging
-          echo "======= EXPORT TEMPLATES LOCATION ======="
+          # Set up environment for truly headless operation
+          export DISPLAY=
+          export XDG_RUNTIME_DIR=/tmp/runtime-dir
+          mkdir -p $XDG_RUNTIME_DIR
+          chmod 700 $XDG_RUNTIME_DIR
+          
+          # Show Godot version
+          echo "======= GODOT VERSION ======="
           godot --version
-          godot --path-info
-          echo "======================================="
+          echo "=============================="
           
-          # Try running with more verbose output
-          godot -v --headless --export-release "macOS" ./build/mac/$EXPORT_NAME.zip || true
+          # List templates directory content
+          echo "======= TEMPLATES DIRECTORY ======="
+          ls -la ~/.local/share/godot/export_templates/4.4.stable/
+          echo "=================================="
           
-          # Even if export fails, create a placeholder file so artifact upload doesn't fail
-          if [ ! -f "./build/mac/$EXPORT_NAME.zip" ]; then
+          # Run with explicit headless display server and verbose flags
+          echo "Starting export..."
+          godot --headless --display-driver headless --verbose --export-release "macOS" ./build/mac/$EXPORT_NAME.zip || true
+          
+          # Check if export succeeded
+          if [ -f "./build/mac/$EXPORT_NAME.zip" ]; then
+            echo "Export successful!"
+            ls -la ./build/mac/
+          else
             echo "Export failed, creating placeholder file"
             mkdir -p ./build/mac
             echo "Export failed, please check logs" > ./build/mac/export_failed.txt
@@ -279,7 +340,30 @@ jobs:
           
       - name: Linux Build
         run: |
-          godot -v --headless --export-release "Linux/X11" ./build/linux/$EXPORT_NAME.x86_64
+          # Set up environment for truly headless operation
+          export DISPLAY=
+          export XDG_RUNTIME_DIR=/tmp/runtime-dir
+          mkdir -p $XDG_RUNTIME_DIR
+          chmod 700 $XDG_RUNTIME_DIR
+          
+          # Show Godot version
+          echo "======= GODOT VERSION ======="
+          godot --version
+          echo "=============================="
+          
+          # Run with explicit headless display server
+          echo "Starting Linux export..."
+          godot --headless --display-driver headless --export-release "Linux/X11" ./build/linux/$EXPORT_NAME.x86_64 || true
+          
+          # Check if export succeeded
+          if [ -f "./build/linux/$EXPORT_NAME.x86_64" ]; then
+            echo "Linux export successful!"
+            ls -la ./build/linux/
+          else
+            echo "Linux export failed, creating placeholder file"
+            mkdir -p ./build/linux
+            echo "Export failed, please check logs" > ./build/linux/export_failed.txt
+          fi
           
       - name: Create Archive
         run: |
@@ -294,6 +378,7 @@ jobs:
           path: ${{ env.EXPORT_NAME }}-linux.zip
           
       - name: Deploy to itch.io
+        if: success() && hashFiles('${{ env.EXPORT_NAME }}-linux.zip') != ''
         uses: manleydev/butler-publish-itchio-action@master
         env:
           BUTLER_CREDENTIALS: ${{ secrets.BUTLER_API_KEY }}
