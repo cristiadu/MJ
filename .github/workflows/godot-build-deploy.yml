@@ -163,9 +163,26 @@ jobs:
           mkdir -p ~/.local/share/godot/export_templates/4.4.stable
           cp -r /tmp/godot-templates/templates/* ~/.local/share/godot/export_templates/4.4.stable/
           
-          # Show what we have for debugging
+          # Debug: Print all the files in template directory
           echo "Contents of template directory:"
           ls -la ~/.local/share/godot/export_templates/4.4.stable/
+          
+          # Fix macOS template if needed (check if the file exists and create symlink if necessary)
+          cd ~/.local/share/godot/export_templates/4.4.stable/
+          if [ -f "macos.universal" ] && [ ! -f "godot_macos_release.x86_64" ]; then
+            cp macos.universal godot_macos_release.x86_64
+            echo "Created needed macOS x86_64 template"
+          fi
+          
+          if [ -f "macos.release.universal" ] && [ ! -f "godot_macos_release.x86_64" ]; then
+            cp macos.release.universal godot_macos_release.x86_64
+            echo "Created needed macOS x86_64 template from universal release"
+          fi
+          
+          # List files again to confirm changes
+          echo "Contents after fixes:"
+          ls -la
+          cd -
           
           # Clean up
           rm -rf /tmp/templates.tpz /tmp/godot-templates
