@@ -9,7 +9,7 @@ on:
   workflow_dispatch:  # Allow manual triggering
 
 env:
-  GODOT_VERSION: 4.4.2  # Latest stable Godot 4.4.x version
+  GODOT_VERSION: 4.4.1  # Latest stable Godot version
   EXPORT_NAME: MJ
   ITCH_USERNAME: ${{ vars.ITCH_USERNAME }}
   ITCH_GAME_NAME: ${{ vars.ITCH_GAME_NAME }}  # Your itch.io game name/URL path
@@ -33,16 +33,19 @@ jobs:
 
       - name: Setup Export Templates
         run: |
-          mkdir -p ~/.local/share/godot/export_templates/$GODOT_VERSION.stable
-          curl -L -o /tmp/templates.tpz https://github.com/godotengine/godot/releases/download/$GODOT_VERSION-stable/Godot_v$GODOT_VERSION-stable_export_templates.tpz
+          mkdir -p ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+          curl -L -o /tmp/templates.tpz https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_export_templates.tpz
           unzip /tmp/templates.tpz -d /tmp
-          mv /tmp/templates/* ~/.local/share/godot/export_templates/$GODOT_VERSION.stable/
+          ls -la /tmp
+          mv /tmp/templates/* ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable/
           rm -f /tmp/templates.tpz
           mkdir -p ~/.config/godot/
           mkdir -p ./build/web
           
       - name: Web Build
         run: |
+          godot --version
+          ls -la ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable/
           godot -v --headless --export-release "Web" ./build/web/index.html
           
       - name: Upload Artifact
@@ -78,10 +81,10 @@ jobs:
 
       - name: Setup Export Templates
         run: |
-          mkdir -p ~/.local/share/godot/export_templates/$GODOT_VERSION.stable
-          curl -L -o /tmp/templates.tpz https://github.com/godotengine/godot/releases/download/$GODOT_VERSION-stable/Godot_v$GODOT_VERSION-stable_export_templates.tpz
+          mkdir -p ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+          curl -L -o /tmp/templates.tpz https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_export_templates.tpz
           unzip /tmp/templates.tpz -d /tmp
-          mv /tmp/templates/* ~/.local/share/godot/export_templates/$GODOT_VERSION.stable/
+          mv /tmp/templates/* ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable/
           rm -f /tmp/templates.tpz
           mkdir -p ~/.config/godot/
           mkdir -p ./build/windows
@@ -129,10 +132,10 @@ jobs:
 
       - name: Setup Export Templates
         run: |
-          mkdir -p ~/.local/share/godot/export_templates/$GODOT_VERSION.stable
-          curl -L -o /tmp/templates.tpz https://github.com/godotengine/godot/releases/download/$GODOT_VERSION-stable/Godot_v$GODOT_VERSION-stable_export_templates.tpz
+          mkdir -p ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+          curl -L -o /tmp/templates.tpz https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_export_templates.tpz
           unzip /tmp/templates.tpz -d /tmp
-          mv /tmp/templates/* ~/.local/share/godot/export_templates/$GODOT_VERSION.stable/
+          mv /tmp/templates/* ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable/
           rm -f /tmp/templates.tpz
           mkdir -p ~/.config/godot/
           mkdir -p ./build/mac
@@ -174,10 +177,10 @@ jobs:
 
       - name: Setup Export Templates
         run: |
-          mkdir -p ~/.local/share/godot/export_templates/$GODOT_VERSION.stable
-          curl -L -o /tmp/templates.tpz https://github.com/godotengine/godot/releases/download/$GODOT_VERSION-stable/Godot_v$GODOT_VERSION-stable_export_templates.tpz
+          mkdir -p ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+          curl -L -o /tmp/templates.tpz https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_export_templates.tpz
           unzip /tmp/templates.tpz -d /tmp
-          mv /tmp/templates/* ~/.local/share/godot/export_templates/$GODOT_VERSION.stable/
+          mv /tmp/templates/* ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable/
           rm -f /tmp/templates.tpz
           mkdir -p ~/.config/godot/
           mkdir -p ./build/linux

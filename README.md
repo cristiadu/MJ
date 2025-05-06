@@ -1,6 +1,4 @@
 # MJ
-<<<<<<< Updated upstream
-=======
 
 Mahjong game implementation in Godot 4.4.
 
@@ -43,11 +41,10 @@ If you prefer to manually deploy your game:
 
 ### Requirements
 
-- Godot 4.4.2 or newer
+- Godot 4.4.1 or newer
 
 ### Getting Started
 
 1. Clone the repository
 2. Open the project in Godot
 3. Press F5 to run the game
->>>>>>> Stashed changes
