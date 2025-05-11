@@ -11,15 +11,15 @@ config_version=5
 [application]
 
 config/name="MJ"
-run/main_scene="res://game.tscn"
+run/main_scene="res://scenes/main/game.tscn"
 config/features=PackedStringArray("4.4", "Mobile")
-config/icon="res://icon.svg"
+config/icon="res://resources/images/icon.svg"
 
 [autoload]
 
-GameState="*res://game_state.gd"
-TileData="*res://tile_data.gd"
-NotificationHandler="*res://notification_handler.gd"
+GameState="*res://scripts/core/game_state.gd"
+TileData="*res://scripts/tiles/tile_data.gd"
+NotificationHandler="*res://scripts/core/notification_handler.gd"
 
 [display]
 

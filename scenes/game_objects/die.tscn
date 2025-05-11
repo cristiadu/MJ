@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bq8m5xya83pmc"]
+
+[ext_resource type="Script" path="res://scripts/ui/die.gd" id="1_6erqk"]
+[ext_resource type="Texture2D" path="res://resources/images/dice.png" id="2_k57dq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tuph3"]
+size = Vector2(48, 48)
+
+[node name="Die" type="RigidBody2D"]
+script = ExtResource("1_6erqk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = -1.5708
+texture = ExtResource("2_k57dq")
+hframes = 3
+vframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_tuph3")

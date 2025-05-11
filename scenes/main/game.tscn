@@ -1,0 +1,248 @@
+[gd_scene load_steps=13 format=3 uid="uid://bv3lqh4tfpnki"]
+
+[ext_resource type="Script" uid="uid://d3lv156dcv03w" path="res://scripts/core/game.gd" id="1_6i4ir"]
+[ext_resource type="PackedScene" uid="uid://dg5qqqe5yibgh" path="res://scenes/game_objects/table_area.tscn" id="1_ie33v"]
+[ext_resource type="Script" uid="uid://comtc5eaeiq33" path="res://scripts/ui/HUD.gd" id="2_fll6r"]
+[ext_resource type="PackedScene" uid="uid://eg0uo0av0pnq" path="res://scenes/ui/user_portrait.tscn" id="2_fpx23"]
+[ext_resource type="Script" uid="uid://dg238ae2e3xcc" path="res://scripts/players/Human.gd" id="3_fx0ap"]
+[ext_resource type="Script" uid="uid://vgwg4lr8iagc" path="res://scripts/players/player_hand.gd" id="4_58fn3"]
+[ext_resource type="Script" uid="uid://cvm7rc21vpdcw" path="res://scripts/table/discard.gd" id="4_kud7w"]
+[ext_resource type="Script" uid="uid://csoy26cvrtpem" path="res://scripts/table/table_tiles.gd" id="5_gvm74"]
+[ext_resource type="Script" uid="uid://bs11d4rqw3srw" path="res://scripts/players/CPU.gd" id="6_k4jhx"]
+[ext_resource type="Script" uid="uid://dewm3lux3uhd1" path="res://scripts/table/table.gd" id="8_x2g4q"]
+[ext_resource type="PackedScene" uid="uid://bq8m5xya83pmc" path="res://scenes/game_objects/die.tscn" id="11_bn0d6"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_uqkq3"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_6i4ir")
+
+[node name="HUD" type="CanvasGroup" parent="."]
+script = ExtResource("2_fll6r")
+
+[node name="Background" type="Sprite2D" parent="HUD"]
+modulate = Color(0.756237, 0.831953, 0.951819, 1)
+position = Vector2(960, 540)
+scale = Vector2(1920, 1080)
+texture = SubResource("CanvasTexture_uqkq3")
+
+[node name="TableArea" parent="HUD" instance=ExtResource("1_ie33v")]
+position = Vector2(960, 513)
+scale = Vector2(0.883, 1.325)
+
+[node name="Player1" parent="HUD" instance=ExtResource("2_fpx23")]
+position = Vector2(960, 998)
+player_name = "Player 1"
+
+[node name="Buttons" type="Node2D" parent="HUD/Player1"]
+position = Vector2(-960, -998)
+
+[node name="DiscardButton" type="Button" parent="HUD/Player1/Buttons"]
+offset_left = 1056.0
+offset_top = 919.0
+offset_right = 1224.0
+offset_bottom = 960.0
+text = "Discard Tile"
+
+[node name="DrawTileButton" type="Button" parent="HUD/Player1/Buttons"]
+offset_left = 1056.0
+offset_top = 1024.0
+offset_right = 1224.0
+offset_bottom = 1065.0
+text = "Draw Tile"
+
+[node name="SpecialPlayButton" type="Button" parent="HUD/Player1/Buttons"]
+offset_left = 1056.0
+offset_top = 971.0
+offset_right = 1224.0
+offset_bottom = 1012.0
+text = "PONG!"
+
+[node name="Player2" parent="HUD" instance=ExtResource("2_fpx23")]
+position = Vector2(960, 82)
+player_name = "Player 2"
+player_number = "player2"
+
+[node name="Player3" parent="HUD" instance=ExtResource("2_fpx23")]
+position = Vector2(1838, 540)
+player_name = "Player 3"
+player_number = "player3"
+
+[node name="Player4" parent="HUD" instance=ExtResource("2_fpx23")]
+position = Vector2(82, 540)
+player_name = "Player 4"
+player_number = "player4"
+
+[node name="Tiles" type="Node2D" parent="."]
+
+[node name="Player1" type="Node2D" parent="Tiles"]
+script = ExtResource("3_fx0ap")
+
+[node name="Hand" type="Node2D" parent="Tiles/Player1"]
+position = Vector2(358, 846)
+script = ExtResource("4_58fn3")
+tiles_on_hand_draggable = true
+
+[node name="ExposedTiles" type="Node2D" parent="Tiles/Player1"]
+position = Vector2(300, 980)
+scale = Vector2(0.5, 0.5)
+
+[node name="Player2" type="Node2D" parent="Tiles"]
+script = ExtResource("6_k4jhx")
+player_number = 2
+
+[node name="Hand" type="Node2D" parent="Tiles/Player2"]
+position = Vector2(1350, 206)
+rotation = 3.14159
+scale = Vector2(0.6, 0.6)
+script = ExtResource("4_58fn3")
+
+[node name="ExposedTiles" type="Node2D" parent="Tiles/Player2"]
+position = Vector2(1350, 100)
+rotation = 3.14159
+scale = Vector2(0.6, 0.6)
+
+[node name="Player3" type="Node2D" parent="Tiles"]
+script = ExtResource("6_k4jhx")
+player_number = 3
+
+[node name="Hand" type="Node2D" parent="Tiles/Player3"]
+position = Vector2(1710, 161)
+rotation = 1.5708
+scale = Vector2(0.6, 0.6)
+script = ExtResource("4_58fn3")
+
+[node name="ExposedTiles" type="Node2D" parent="Tiles/Player3"]
+position = Vector2(1810, 161)
+rotation = 1.5708
+scale = Vector2(0.6, 0.6)
+
+[node name="Player4" type="Node2D" parent="Tiles"]
+script = ExtResource("6_k4jhx")
+player_number = 4
+
+[node name="Hand" type="Node2D" parent="Tiles/Player4"]
+position = Vector2(210, 881)
+rotation = -1.5708
+scale = Vector2(0.6, 0.6)
+script = ExtResource("4_58fn3")
+
+[node name="ExposedTiles" type="Node2D" parent="Tiles/Player4"]
+position = Vector2(110, 881)
+rotation = -1.5708
+scale = Vector2(0.6, 0.6)
+
+[node name="Discard" type="Node2D" parent="Tiles"]
+position = Vector2(806, 346)
+scale = Vector2(0.3, 0.3)
+script = ExtResource("4_kud7w")
+
+[node name="Line1" type="Node2D" parent="Tiles/Discard"]
+
+[node name="Line2" type="Node2D" parent="Tiles/Discard"]
+position = Vector2(0, 140)
+
+[node name="Line3" type="Node2D" parent="Tiles/Discard"]
+position = Vector2(0, 280)
+
+[node name="Line4" type="Node2D" parent="Tiles/Discard"]
+position = Vector2(0, 420)
+
+[node name="Line5" type="Node2D" parent="Tiles/Discard"]
+position = Vector2(0, 560)
+
+[node name="Line6" type="Node2D" parent="Tiles/Discard"]
+position = Vector2(0, 700)
+
+[node name="Line7" type="Node2D" parent="Tiles/Discard"]
+position = Vector2(0, 840)
+
+[node name="Line8" type="Node2D" parent="Tiles/Discard"]
+position = Vector2(0, 980)
+
+[node name="Table" type="Node2D" parent="Tiles"]
+script = ExtResource("8_x2g4q")
+
+[node name="North" type="Node2D" parent="Tiles/Table"]
+position = Vector2(742, 291)
+rotation = 0.0872665
+scale = Vector2(0.22, 0.22)
+script = ExtResource("5_gvm74")
+space_between_tiles = 110
+
+[node name="BottomPile" type="Node2D" parent="Tiles/Table/North"]
+modulate = Color(0.646029, 0.646029, 0.646029, 1)
+
+[node name="TopPile" type="Node2D" parent="Tiles/Table/North"]
+position = Vector2(0, -30)
+
+[node name="East" type="Node2D" parent="Tiles/Table"]
+position = Vector2(1185, 300)
+rotation = 1.65806
+scale = Vector2(0.22, 0.22)
+script = ExtResource("5_gvm74")
+space_between_tiles = 110
+
+[node name="BottomPile" type="Node2D" parent="Tiles/Table/East"]
+modulate = Color(0.646029, 0.646029, 0.646029, 1)
+
+[node name="TopPile" type="Node2D" parent="Tiles/Table/East"]
+position = Vector2(0, -30)
+
+[node name="South" type="Node2D" parent="Tiles/Table"]
+position = Vector2(1174, 739)
+rotation = 3.22886
+scale = Vector2(0.22, 0.22)
+script = ExtResource("5_gvm74")
+space_between_tiles = 110
+
+[node name="BottomPile" type="Node2D" parent="Tiles/Table/South"]
+modulate = Color(0.646029, 0.646029, 0.646029, 1)
+
+[node name="TopPile" type="Node2D" parent="Tiles/Table/South"]
+position = Vector2(0, -30)
+
+[node name="West" type="Node2D" parent="Tiles/Table"]
+position = Vector2(731, 732)
+rotation = -1.48353
+scale = Vector2(0.22, 0.22)
+script = ExtResource("5_gvm74")
+space_between_tiles = 110
+
+[node name="BottomPile" type="Node2D" parent="Tiles/Table/West"]
+modulate = Color(0.646029, 0.646029, 0.646029, 1)
+
+[node name="TopPile" type="Node2D" parent="Tiles/Table/West"]
+position = Vector2(0, -30)
+
+[node name="Dice" type="Node2D" parent="."]
+position = Vector2(1700, 40)
+
+[node name="DiceOverlay" type="ColorRect" parent="Dice"]
+offset_left = -40.0
+offset_top = -29.0
+offset_right = 160.0
+offset_bottom = 56.0
+color = Color(0, 0, 0, 0.556863)
+
+[node name="Label" type="Label" parent="Dice/DiceOverlay"]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 55.0
+offset_right = 158.0
+offset_bottom = 83.0
+theme_override_constants/line_spacing = 0
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_font_sizes/font_size = 20
+text = "DICE ROLLS"
+
+[node name="Die1" parent="Dice" instance=ExtResource("11_bn0d6")]
+
+[node name="Die2" parent="Dice" instance=ExtResource("11_bn0d6")]
+position = Vector2(60, 0)
+
+[node name="Die3" parent="Dice" instance=ExtResource("11_bn0d6")]
+position = Vector2(120, 0)
