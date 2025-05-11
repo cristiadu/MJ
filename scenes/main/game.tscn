@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://dg238ae2e3xcc" path="res://scripts/players/Human.gd" id="3_fx0ap"]
 [ext_resource type="Script" uid="uid://vgwg4lr8iagc" path="res://scripts/players/player_hand.gd" id="4_58fn3"]
 [ext_resource type="Script" uid="uid://cvm7rc21vpdcw" path="res://scripts/table/discard.gd" id="4_kud7w"]
-[ext_resource type="Script" uid="uid://csoy26cvrtpem" path="res://scripts/table/table_tiles.gd" id="5_gvm74"]
+[ext_resource type="Script" uid="uid://burq4205uaaxx" path="res://scripts/table/table_tiles.gd" id="5_gvm74"]
 [ext_resource type="Script" uid="uid://bs11d4rqw3srw" path="res://scripts/players/CPU.gd" id="6_k4jhx"]
 [ext_resource type="Script" uid="uid://dewm3lux3uhd1" path="res://scripts/table/table.gd" id="8_x2g4q"]
 [ext_resource type="PackedScene" uid="uid://bq8m5xya83pmc" path="res://scenes/game_objects/die.tscn" id="11_bn0d6"]
